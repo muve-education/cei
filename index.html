@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>目目眼動師資：薪資、晉升與考核新制說明會</title>
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mumu: {
+                            blue: '#00A196',       // 科技青綠色 (官方主要 pill 科技色)
+                            blueLight: '#00D2C4',  // 亮青綠色
+                            orange: '#FFC53D',     // 眼動溫慢黃 (官方圓圈顏色)
+                            navy: '#1E293B',       // 質感深石墨藍 (官方文字主色)
+                            light: '#f8fafc',
+                            slate: '#475569'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f1f5f9;
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        /* 投影片基本卡片樣式 */
+        .reveal .slides section {
+            text-align: left;
+            background: #ffffff;
+            color: #334155;
+            border-radius: 24px;
+            padding: 40px 50px;
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 8px 16px -6px rgba(0, 0, 0, 0.03);
+            border-top: 10px solid #00A196;
+            height: 650px;
+            width: 1050px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* 標題與視覺層次 */
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 900;
+            color: #1E293B;
+            margin: 0;
+        }
+
+        .slide-title {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            border-bottom: 4px solid #FFC53D;
+            display: inline-block;
+            padding-bottom: 8px;
+            color: #00A196;
+        }
+
+        /* 簡報內文字型大小與行高 */
+        .reveal p {
+            font-size: 1.05rem !important;
+            line-height: 1.75 !important;
+            color: #475569 !important;
+        }
+
+        .reveal li {
+            font-size: 1rem !important;
+            line-height: 1.65 !important;
+        }
+
+        /* 自訂高級卡片元件 */
+        .info-card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .info-card:hover {
+            border-color: #FFC53D;
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .info-card h4 {
+            font-size: 1.15rem !important;
+        }
+
+        .badge-amber {
+            background-color: #fef3c7;
+            color: #d97706;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* 簡報表格樣式 - 優化間距與行距 */
+        .slide-table {
+            width: 100%;
+            font-size: 0.95rem;
+            border-collapse: collapse;
+        }
+        .slide-table th {
+            background-color: #00A196;
+            color: white;
+            font-weight: bold;
+            padding: 16px;
+            text-align: center;
+        }
+        .slide-table td {
+            padding: 18px 16px; /* 增加上下 padding 加大行間距 */
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            line-height: 1.8 !important; /* 顯著加大文字行距，閱讀體驗更佳 */
+        }
+        .bg-zebra {
+            background-color: #f8fafc;
+        }
+
+        /* 導覽列動畫 */
+        .tab-btn {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background-color: #FFC53D;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .tab-btn.active {
+            color: #00A196;
+            font-weight: 800;
+        }
+        .tab-btn.active::after {
+            width: 80%;
+        }
+
+        /* 計算器客製化滑桿 */
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #cbd5e1;
+            outline: none;
+        }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #FFC53D;
+            cursor: pointer;
+            box-shadow: 0 4px 10px -1px rgba(0,0,0,0.25);
+            transition: transform 0.1s ease;
+        }
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+
+        /* 簡報母容器動態縮放設定 */
+        #view-presentation {
+            transition: height 0.3s ease;
+        }
+        .reveal {
+            transform-origin: top center;
+            transition: transform 0.3s ease;
+        }
+
+        /* 自訂 Reveal 控制按鈕 */
+        .reveal .controls {
+            bottom: 20px !important;
+            right: 20px !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col selection:bg-amber-500/30 selection:text-slate-900">
+
+    <!-- Top Premium Navigation Bar with Official High-Res Logo Directly Rendered -->
+    <header class="bg-white shadow-md sticky top-0 z-50 px-4 md:px-8 py-3 flex flex-col lg:flex-row justify-between items-center gap-4 border-b border-slate-100">
+        <!-- Logo Area with official high-resolution image directly referenced -->
+        <div class="flex items-center gap-3">
+            <img src="muve-logo-07.png" alt="目目非營利" class="h-10 md:h-12 w-auto object-contain">
+            <div class="h-8 w-[1px] bg-slate-200 hidden sm:block"></div>
+            <span class="text-xs font-bold text-slate-400 hidden sm:inline-block">眼動師資福利新制</span>
+        </div>
+        
+        <!-- Interactive Tabs for Presentation and Toolkit (Removed policy tab to optimize view logic) -->
+        <nav class="flex items-center gap-1 bg-slate-100 p-1 rounded-2xl w-full lg:w-auto overflow-x-auto">
+            <button onclick="switchTab('presentation')" id="btn-presentation" class="tab-btn active px-4 md:px-5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-mumu-blue transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-person-chalkboard"></i> <span>簡報模式</span>
+            </button>
+            <button onclick="switchTab('calculator')" id="btn-calculator" class="tab-btn px-4 md:px-5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-mumu-blue transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-calculator"></i> <span>薪資獎助金試算</span>
+            </button>
+        </nav>
+        
+        <div class="hidden lg:block w-12"></div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow flex items-center justify-center py-6 px-4 md:px-6">
+
+        <!-- TAB 1: PRESENTATION VIEW -->
+        <div id="view-presentation" class="w-full max-w-6xl h-[700px] bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative border border-slate-700">
+            
+            <!-- Quick Slide Navigation Bar Overlay -->
+            <div class="absolute top-4 left-4 z-40 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg text-xs flex items-center gap-2 md:gap-4 border border-slate-200 max-w-[90%] overflow-hidden">
+                <span class="font-bold text-mumu-blue hidden md:inline-flex items-center gap-1"><i class="fa-solid fa-list"></i> 簡報大綱：</span>
+                <select id="slide-jump" onchange="jumpToSlide(this.value)" class="bg-transparent border-none text-slate-700 font-extrabold focus:ring-0 cursor-pointer text-xs focus:outline-none">
+                    <option value="0">1. 新制說明會封面</option>
+                    <option value="1">2. 核心設計原則</option>
+                    <option value="2">3. 職等與薪資結構</option>
+                    <option value="3">4. 年度資格維持條件</option>
+                    <option value="4">5. 晉升與降級回升</option>
+                    <option value="5">6. 行政與預審機制</option>
+                    <option value="6">7. 離職回歸復權辦法</option>
+                    <option value="7">8. 誠信合約與三大紅線</option>
+                    <option value="8">9. 啟動願景與結語</option>
+                </select>
+            </div>
+
+            <!-- Fullscreen Toggle Button -->
+            <button onclick="toggleFullscreen()" class="absolute top-4 right-4 z-40 bg-white/95 backdrop-blur-md hover:bg-white p-2.5 rounded-full shadow-lg text-slate-600 hover:text-mumu-blue transition border border-slate-200" title="切換全螢幕">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+
+            <!-- Reveal.js Container -->
+            <div class="reveal h-full w-full">
+                <div class="slides">
+
+                    <!-- Slide 1: Cover -->
+                    <section class="text-center flex flex-col justify-center items-center" style="border-top: 10px solid #00A196;" data-background-gradient="linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)">
+                        <div class="mb-6 text-6xl text-mumu-blue animate-bounce">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-wide text-mumu-blue mb-4 px-4">
+                            CEI 認證眼動師資
+                        </h1>
+                        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-600 mb-8 whitespace-nowrap">
+                            全新薪資、晉升與考核制度說明會
+                        </h2>
+                        <div class="h-1.5 w-24 bg-mumu-orange mb-8 rounded-full"></div>
+                        <p class="text-lg text-slate-500 font-mono tracking-widest font-semibold">社團法人中華民國目目協會</p>
+                    </section>
+
+                    <!-- Slide 2: Core Philosophy -->
+                    <section>
+                        <div class="slide-title"><i class="fa-solid fa-compass mr-3"></i>核心設計原則</div>
+                        <p class="text-slate-600 mb-6 -mt-3 text-base md:text-lg font-medium">不加班、不額外加案、回歸「教學品質」與「合約誠信」</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="info-card flex items-start gap-4">
+                                <div class="text-4xl text-mumu-blue mt-1"><i class="fa-solid fa-award"></i></div>
+                                <div>
+                                    <h4 class="text-lg font-bold mb-2 text-mumu-blue">專業身份：終身認證資格</h4>
+                                    <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
+                                        只要通過實作考核並獲得 CEI 證書，您的<strong>「專業身分」將終身有效</strong>。
+                                        即使因個人規劃暫停接案，您的<strong>生涯總堂數</strong>將永久保留。
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="info-card flex items-start gap-4">
+                                <div class="text-4xl text-mumu-orange mt-1"><i class="fa-solid fa-calendar-check"></i></div>
+                                <div>
+                                    <h4 class="text-lg font-bold mb-2 text-mumu-blue">當期報酬：年度動態審查</h4>
+                                    <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
+                                        為了落實品質與對價，<strong>「獎勵金級距」採取年度制（每年 1/1 重新起算）</strong>。
+                                        維持穩定產能（年度 120 堂）並配合行政紀律的老師，<strong>即可</strong>享有高階獎勵加成。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-teal-50/50 border-l-4 border-l-mumu-blue rounded-xl text-xs md:text-sm text-mumu-navy flex items-center gap-3">
+                            <i class="fa-solid fa-circle-info text-lg text-mumu-blue"></i>
+                            <span><strong>經營宗旨：</strong>我們不鼓勵暴增課量或犧牲生活，而是透過「120 堂基本年約」建立穩健的眼動教育生態。</span>
+                        </div>
+                    </section>
+
+                    <!-- Slide 3: Salary Structures -->
+                    <section>
+                        <div class="slide-title"><i class="fa-solid fa-sack-dollar mr-3"></i>最新師資職等與薪資結構</div>
+                        <p class="text-slate-600 mb-5 -mt-3 text-base font-medium">基本課酬配合二段式獎助金，領取資格清晰明確</p>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="slide-table shadow-sm rounded-xl overflow-hidden border border-slate-150">
+                                <thead>
+                                    <tr>
+                                        <th class="rounded-tl-lg">階段與職等</th>
+                                        <th>合約期限</th>
+                                        <th>基本時薪</th>
+                                        <th class="rounded-tr-lg text-left pl-6">年度累積獎助金 (每 10 堂結算，隔年重新起算)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-bold text-slate-700">T0 培訓教師</td>
+                                        <td>30hr 培訓約</td>
+                                        <td>$1,000</td>
+                                        <td class="text-left pl-6 text-slate-400 italic">無獎助金</td>
+                                    </tr>
+                                    <tr class="bg-zebra">
+                                        <td class="font-bold text-slate-700">T1 儲備教師</td>
+                                        <td>半年一約</td>
+                                        <td>$1,200</td>
+                                        <td class="text-left pl-6 text-slate-400 italic">無獎助金</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold text-mumu-navy">CEI-Ⅰ 一級師資</td>
+                                        <td>定簽年約</td>
+                                        <td>$1,200</td>
+                                        <td class="text-left pl-6 font-semibold text-mumu-navy">
+                                            • 0 - 120 堂：每 10 堂加發 <strong>$2,200</strong> (+220/堂)<br>
+                                            • 121 堂以上：每 10 堂加發 <strong>$3,200</strong> (+320/堂)
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-zebra">
+                                        <td class="font-bold text-mumu-navy rounded-bl-lg">CEI-Ⅱ 二級師資</td>
+                                        <td>定簽年約</td>
+                                        <td>$1,200</td>
+                                        <td class="text-left pl-6 font-semibold text-mumu-navy rounded-br-lg">
+                                            • 0 - 120 堂：每 10 堂加發 <strong>$3,800</strong> (+380/堂)<br>
+                                            • 121 堂以上 : 每 10 堂加發 <strong>$4,600</strong> (+460/堂)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 text-xs md:text-sm text-slate-400 italic flex items-center gap-1.5 font-medium">
+                            <i class="fa-solid fa-circle-question text-mumu-blue"></i>
+                            <span>* 註：每年度 12/31 結算時若累積尾數未滿 10 堂，剩餘堂數一律依比例全額發清，隔年 1/1 累積堂數自動歸零。可以使用上方「獎助金試算」功能進行試算！</span>
+                        </div>
+                    </section>
+
+                    <!-- Slide 4: Annual Goals -->
+                    <section>
+                        <div class="slide-title"><i class="fa-solid fa-list-check mr-3"></i>年度常態任務：資格維持條件</div>
+                        <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">每年年底結算，未達標者隔年強制調降一級（鎖定一年）</p>
+                        
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="info-card border-t-4 border-t-mumu-blue flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <span class="badge-amber bg-teal-50 text-mumu-blue text-sm py-1.5 px-3">CEI-Ⅰ 一級師資任務</span>
+                                    </div>
+                                    <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
+                                        <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
+                                        <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
+                                        <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="text-xs md:text-sm text-mumu-blue font-bold bg-teal-50/50 p-2.5 rounded-lg border border-teal-200 mt-4">
+                                    維持一級資格期間，無須繳交個案報告！
+                                </div>
+                            </div>
+                            
+                            <div class="info-card border-t-4 border-t-mumu-orange flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <span class="badge-amber bg-amber-50 text-mumu-navy text-sm py-1.5 px-3">CEI-Ⅱ 二級師資任務</span>
+                                    </div>
+                                    <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
+                                        <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
+                                        <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
+                                        <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="text-xs md:text-sm text-mumu-navy font-bold bg-amber-50/50 p-2.5 rounded-lg border border-amber-200 mt-4 leading-relaxed">
+                                    <i class="fa-solid fa-file-invoice mr-1 text-mumu-orange"></i> <strong>專業品質指標（報告二選一）：</strong><br>
+                                    當年度需提交並通過 1 份個案報告（PECS實作 / 研習融入報告）。
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Slide 5: Promotion & Recovery -->
+                    <section class="!py-6">
+                        <div class="slide-title !mb-3"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>常態晉升與「降級回升」機制</div>
+                        <p class="text-slate-600 mb-3 -mt-2 text-sm font-medium">每年 12 月大盤點，次年 1 月 1 日正式生效（晉升/回升一律對齊同標準）</p>
+                        
+                        <div class="space-y-2">
+                            <!-- Compact Card 1 with Unified Readable Requirements Font Style -->
+                            <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
+                                <div class="flex items-center gap-4 flex-grow">
+                                    <div class="text-2xl text-mumu-blue flex-shrink-0"><i class="fa-solid fa-seedling animate-pulse"></i></div>
+                                    <div class="flex-grow flex flex-col">
+                                        <h4 class="font-bold text-mumu-blue text-sm">T1 儲備 ➔ 晉升 CEI-Ⅰ</h4>
+                                        <div class="flex flex-wrap gap-x-2 gap-y-1 mt-0.5 text-xs md:text-[13px] text-slate-500 font-medium">
+                                            <span class="whitespace-nowrap">1. 生涯總累積滿 60 堂</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">2. PECS 1~3階報告 1 份</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">3. 學生現況分析表 1 份</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">4. 修畢代幣課程</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">5. 完成年度必修教育時數</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right flex-shrink-0 ml-4">
+                                    <span class="badge-amber bg-teal-50 text-mumu-blue font-bold shadow-sm text-xs py-0.5 px-2 whitespace-nowrap">正式授證</span>
+                                </div>
+                            </div>
+
+                            <!-- Compact Card 2 with Unified Readable Requirements Font Style -->
+                            <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
+                                <div class="flex items-center gap-4 flex-grow">
+                                    <div class="text-2xl text-mumu-orange flex-shrink-0"><i class="fa-solid fa-crown"></i></div>
+                                    <div class="flex-grow flex flex-col">
+                                        <h4 class="font-bold text-mumu-navy text-sm">CEI-Ⅰ ➔ 晉升 CEI-Ⅱ</h4>
+                                        <div class="flex flex-wrap gap-x-2 gap-y-1 mt-0.5 text-xs md:text-[13px] text-slate-500 font-medium">
+                                            <span class="whitespace-nowrap">1. 生涯總累積滿 240 堂</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">2. PECS 1~3階報告 1 份</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">3. 研討融入報告 1 份</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">4. 修畢 PECS 4 課程</span>
+                                            <span class="text-slate-300">|</span>
+                                            <span class="whitespace-nowrap">5. 完成年度必修教育時數</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right flex-shrink-0 ml-4">
+                                    <span class="badge-amber bg-amber-50 text-mumu-navy font-bold shadow-sm text-xs py-0.5 px-2 whitespace-nowrap">解鎖高額獎助金</span>
+                                </div>
+                            </div>
+
+                            <!-- Compact Card 3: Downgrade Recovery with optimized sizing to completely fit inside Reveal.js context -->
+                            <div class="info-card bg-amber-50/20 border-amber-200 !py-2.5 !px-4 shadow-sm">
+                                <h4 class="font-bold text-mumu-navy flex items-center gap-2 mb-0.5 text-sm">
+                                    <i class="fa-solid fa-arrows-spin text-mumu-blue"></i> 降級後回升原職級規定
+                                </h4>
+                                <p class="text-[11px] lg:text-xs text-slate-600 leading-relaxed font-medium">
+                                    因降級者之「生涯總累積堂數」已跨越門檻，<strong>無需重新累積總堂數</strong>。
+                                    被降級的這一年，<strong>老師須達成當年度常態任務，並於盤點期前完成目標職級晉升所需之所有個案報告與培訓任務</strong>，即可於次年 1 月 1 日正式回升。
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Slide 6: December Audit -->
+                    <section>
+                        <div class="slide-title"><i class="fa-solid fa-calendar-days mr-3"></i>行政對帳與「12/19 預審機制」</div>
+                        <p class="text-slate-600 mb-5 -mt-3 text-base font-medium">配合每月 19 號切帳與次月 5 號發薪之常態流程，實施預審與結算制度</p>
+                        
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="info-card border-l-4 border-l-mumu-blue flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-mumu-blue mb-2 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-calculator"></i> 12 月 19 日：年底大盤點與預審
+                                    </h4>
+                                    <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
+                                        <li><strong>預審公式：</strong> <code>1/1 ~ 12/19 實際堂數</code> + <code>12/20 ~ 12/31 系統排課數</code></li>
+                                        <li><strong>提前判定：</strong> 兩者相加滿 120 堂即判定達標，保留明年原職等與續約資格。</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-red-50 p-2.5 rounded-lg text-red-900 border border-red-100 text-xs leading-relaxed mt-2">
+                                    <strong>安全防護補丁：</strong> 若預審通過後因自身因素取消課程未補課，導致整年未滿 120 堂，原資格無效並追溯降級與扣回差額。
+                                </div>
+                            </div>
+
+                            <div class="info-card border-l-4 border-l-emerald-600 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-repeat"></i> 1 月 19 日：跨年堂數與獎金拆分
+                                    </h4>
+                                    <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
+                                        <li><strong>舊年度尾數全變現：</strong> <code>12/20 ~ 12/31</code> 的堂數計入舊年度。在 1/19 結算時，不論累積餘數是否滿 10 堂，一律依舊年度最終費率等比例變現發清，舊累計堂數正式歸零。</li>
+                                        <li><strong>新年度全新起跑：</strong> <code>1/1 ~ 1/19</code> 上的課，則直接歸入新年度，重新起算每 10 堂的結算旅程。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Slide 7: Rehire Policy -->
+                    <section>
+                        <div class="slide-title"><i class="fa-solid fa-rotate mr-3"></i>離職回歸與復權管理辦法</div>
+                        
+                        <div class="space-y-3">
+                            <div class="p-3 bg-slate-50 hover:bg-slate-100 transition border border-slate-200 rounded-xl flex items-center justify-between">
+                                <div class="text-sm font-bold text-slate-800 w-48 flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+                                    <span>1. 中斷服務【半年內】</span>
+                                </div>
+                                <p class="text-xs md:text-sm text-slate-600 w-3/4 leading-relaxed font-medium">
+                                    <strong>直接回歸原職級</strong>。年底考核目標採純比例減免：<strong>當年度剩餘月份 × 10 堂</strong>。<br>
+                                    達標者隔年維持原職級，未達標者隔年強制降一級。
+                                </p>
+                            </div>
+                            <div class="p-3 bg-teal-50/50 hover:bg-teal-50 transition border border-teal-100 rounded-xl flex items-center justify-between">
+                                <div class="text-sm font-bold text-mumu-blue w-48 flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-mumu-blueLight"></span>
+                                    <span>2. 離職【半年至一年內】</span>
+                                </div>
+                                <p class="text-xs md:text-sm text-slate-600 w-3/4 leading-relaxed font-medium">
+                                    <strong>強制降一級落腳發薪</strong>。年底考核目標同樣採 <strong>剩餘月份 × 10 堂</strong> 計算。<br>
+                                    只要年底提交高階個案報告並通過審查，隔年 1/1 正式復權、重返原職級！
+                                </p>
+                            </div>
+                            <div class="p-3 bg-amber-50/50 hover:bg-amber-50 transition border border-amber-100 rounded-xl flex flex-col md:flex-row items-start justify-between gap-3">
+                                <div class="text-sm font-bold text-mumu-navy w-48 flex items-center gap-2 mt-1">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-mumu-orange animate-pulse"></span>
+                                    <span>3. 離職【一年以上】</span>
+                                </div>
+                                <!-- Unified clean bullet lists for Year-plus Rejoining, entirely free of standalone boxes/cards as requested -->
+                                <div class="text-xs md:text-sm text-slate-600 w-full md:w-3/4 leading-relaxed font-medium space-y-1">
+                                    <div>• <strong>回歸當下職級</strong>：回歸初次派案一律由 <strong>T1 (儲備師資)</strong> 起跑，領取基礎課酬。</div>
+                                    <div>• <strong>歸隊必備條件</strong>：微補齊中斷期間之最新必修核心課程，並通過督導前期檢核即可重新排課。</div>
+                                    <div class="pt-1">• <strong>年底考核目標</strong>：</div>
+                                    <ul class="list-disc pl-8 space-y-0.5 text-xs text-slate-600">
+                                        <li>生涯總堂數滿 <strong>240 堂</strong>以上 ➔ 可申請晉升 <strong>C2</strong> 並繳交相關晉升申請資料。</li>
+                                        <li>生涯總堂數滿 <strong>60 堂</strong>以上 ➔ 可申請晉升 <strong>C1</strong> 並繳交相關晉升申請資料。</li>
+                                        <li>生涯總堂數未滿 60 堂、個案數未符合 ➔ 留任 <strong>T1</strong> 級別。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Slide 8: Compliance & Red Lines -->
+                    <section>
+                        <div class="slide-title"><i class="fa-solid fa-shield-halved mr-3"></i>誠信合約與三大防禦紅線</div>
+                        <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">行政延誤採「暫停發放」而非扣款；惡意違約設有懲罰與違約金</p>
+                        
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="info-card border-t-4 border-t-mumu-blue flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-mumu-blue mb-3 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-envelope-open-text"></i> 1. 行政配合違失
+                                    </h4>
+                                    <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
+                                        每次上課需於 1 週內完成日誌與影片繳交。若無故遲交達 2 星期以上：<br>
+                                        • <strong>即時處置 (暫停撥款)</strong>：直接暫停發放該期課酬，補齊後的下個月一併恢復補發。<br>
+                                        • <strong>年度處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 3 次或以上</strong>，年底大審強制降級，鎖定一年。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="info-card border-t-4 border-t-red-600 bg-red-50/50 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-red-900 mb-3 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-triangle-exclamation"></i> 2. 嚴重違約行為 (損害商譽與利益衝突)
+                                    </h4>
+                                    <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
+                                        出現下列情事，協會得立即解約並追究損害賠償與 15% 懲罰性違約金：<br>
+                                        • <strong>私下授課限制</strong>：私自與媒合個案簽訂私契、私下教授眼動課、私用目目軟硬體設備進行私人教學。<br>
+                                        • <strong>無故丟包個案</strong>：無故丟包個案、中途失聯，損害學員權益。<br>
+                                        • <strong>專業醫療例外</strong>：非眼動課時間的常態物理/職能/語言復健服務完全合規，<strong>但</strong>嚴禁在私人服務中使用目目財產。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Slide 9: Closing -->
+                    <section class="text-center flex flex-col justify-center items-center" data-background-color="#00A196" style="border-top: none;">
+                        <div class="text-mumu-orange text-2xl md:text-3xl mb-6 font-black tracking-wider">
+                            「資格認證是終身的，執業等級是動態的。」
+                        </div>
+                        <p class="text-teal-50 text-sm md:text-base mb-10 max-w-2xl leading-relaxed font-semibold">
+                            目目全新師資體系，致力於在不增加夥伴工作負擔、不強求加班的前提下，<br>
+                            透過清晰透明的晉升階梯與合理回饋，與各位老師一同守護孩子的眼動教育。
+                        </p>
+                        <button onclick="triggerActivation()" class="bg-mumu-orange text-mumu-navy px-8 py-3.5 rounded-full font-bold shadow-lg transition-all duration-300 transform hover:scale-105 hover:bg-amber-300 focus:outline-none flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-circle-check"></i> 同步啟動新制
+                        </button>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: SALARY CALCULATOR VIEW -->
+        <div id="view-calculator" class="hidden w-full max-w-4xl bg-white rounded-3xl p-6 md:p-8 shadow-2xl border border-slate-200">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-5 mb-6 gap-3">
+                <div>
+                    <h2 class="text-2xl font-black text-mumu-blue flex items-center gap-2">
+                        <i class="fa-solid fa-coins text-mumu-orange"></i>
+                        <span>新制薪資與累積獎助金試算</span>
+                    </h2>
+                    <p class="text-sm text-slate-500 font-bold mt-1">請在下方選擇師資等級並滑動完課堂數，即可即時呈現全年與每堂結算細項！</p>
+                </div>
+                <span class="bg-teal-50 text-mumu-blue font-bold px-3 py-1.5 rounded-lg text-xs border border-teal-100">即時算．免公式</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Inputs Section (Left 5 Columns) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- 1. Rank Selector -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2"><i class="fa-solid fa-id-card mr-1 text-mumu-blue"></i> 第一步：選擇您的師資執業等級</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="setCalcRank('cei-1')" id="btn-calc-cei-1" class="border-2 border-mumu-blue bg-teal-50/40 text-mumu-blue p-4 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition focus:outline-none shadow-sm">
+                                <span class="text-sm">CEI-Ⅰ 一級師資</span>
+                                <span class="text-[11px] text-slate-500 font-normal">基礎: $1200 / 獎勵分段</span>
+                            </button>
+                            <button onclick="setCalcRank('cei-2')" id="btn-calc-cei-2" class="border-2 border-slate-200 hover:border-mumu-orange p-4 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition focus:outline-none">
+                                <span class="text-sm">CEI-Ⅱ 二級師資</span>
+                                <span class="text-[11px] text-slate-500 font-normal">基礎: $1200 / 高額獎勵</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Interactive Range Slider for Sessions -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-bold text-slate-700"><i class="fa-solid fa-circle-play mr-1 text-mumu-orange"></i> 第二步：調整預期年度授課堂數</label>
+                            <span class="text-xs font-bold text-mumu-blue bg-teal-50 px-2 py-1 rounded">可精確輸入至個位數</span>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div class="flex justify-between items-baseline mb-4">
+                                <span class="text-xs text-slate-500 font-bold">手動滑動或精確輸入：</span>
+                                <div>
+                                    <input type="number" id="calc-input-number" min="0" max="300" step="1" value="120" oninput="updateCalculatorFromInput(this.value)" class="w-20 bg-white border border-slate-300 rounded px-2 py-1 text-center font-bold text-lg text-mumu-blue focus:outline-none focus:border-mumu-blue">
+                                    <span class="text-sm font-bold text-slate-600 ml-1">堂</span>
+                                </div>
+                            </div>
+                            <input type="range" id="calc-slider" min="0" max="300" step="1" value="120" oninput="updateCalculator(this.value)" class="range-slider">
+                            <div class="flex justify-between text-[11px] text-slate-400 font-bold mt-2">
+                                <span>0堂</span>
+                                <span>60堂</span>
+                                <span>120堂(年度保級)</span>
+                                <span>240堂</span>
+                                <span>300堂+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Dynamic Threshold Status Check -->
+                    <div id="threshold-status-box" class="p-4 rounded-xl border flex items-start gap-3">
+                        <div id="threshold-icon" class="text-2xl mt-0.5"></div>
+                        <div>
+                            <h4 id="threshold-title" class="font-bold text-sm"></h4>
+                            <p id="threshold-desc" class="text-xs text-slate-500 mt-1 leading-relaxed font-semibold"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outputs Dashboard (Right 7 Columns) -->
+                <div class="lg:col-span-7 bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-extrabold text-slate-500 uppercase tracking-widest"><i class="fa-solid fa-chart-pie mr-1 text-mumu-blue"></i>年度薪資收益總覽</h3>
+                            <button onclick="copyCalculatorReport()" class="text-xs text-teal-800 hover:text-teal-950 font-bold flex items-center gap-1 bg-teal-50 hover:bg-teal-100 px-2.5 py-1.5 rounded-lg border border-teal-100 transition">
+                                <i class="fa-solid fa-copy"></i> <span>複製試算報告</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Main Metrics Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Metric 1: Total Estimate -->
+                            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm col-span-2 relative overflow-hidden">
+                                <span class="text-xs text-slate-400 font-bold block mb-1">年度預估總薪酬報酬 (課酬 + 獎助金)</span>
+                                <div class="flex items-baseline gap-1 text-mumu-blue">
+                                    <span class="text-sm font-extrabold">$</span>
+                                    <span id="result-total" class="text-3xl md:text-4xl font-black font-mono tracking-tight text-mumu-blue">0</span>
+                                    <span class="text-xs text-slate-500 font-bold ml-2">元 / 年</span>
+                                </div>
+                                <div class="absolute right-3 bottom-2 text-6xl text-slate-100/60 pointer-events-none font-black"><i class="fa-solid fa-wallet"></i></div>
+                            </div>
+
+                            <!-- Metric 2: Base Pay -->
+                            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                                <span class="text-xs text-slate-400 font-bold block mb-1">基本堂數課酬 ($1,200/堂)</span>
+                                <div class="text-slate-700 font-bold">
+                                    <span class="text-xs font-semibold">$</span>
+                                    <span id="result-base" class="text-xl font-mono">0</span>
+                                    <span class="text-[11px] text-slate-400 font-normal"> 元</span>
+                                </div>
+                            </div>
+
+                            <!-- Metric 3: Bonus Pay -->
+                            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                                <span class="text-xs text-slate-400 font-bold block mb-1">累積段位獎助金 (總額)</span>
+                                <div class="text-emerald-600 font-bold">
+                                    <span class="text-xs font-semibold">$</span>
+                                    <span id="result-bonus" class="text-xl font-mono">0</span>
+                                    <span class="text-[11px] text-emerald-500/80 font-normal"> 元</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Detail Breakdown Card -->
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                            <span class="text-xs text-slate-400 font-bold block mb-1"><i class="fa-solid fa-list-ol text-mumu-blue mr-1"></i>獎助金分拆與年度尾數變現細項</span>
+                            <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-slate-600">
+                                <div class="bg-slate-50 p-2 rounded">
+                                    <span class="block text-slate-400 text-[10px]">已滿 10 堂結算</span>
+                                    <span class="text-mumu-blue text-sm" id="detail-milestone-pay">$0 元</span>
+                                    <span class="text-[10px] text-slate-400 block" id="detail-milestone-text">(0 堂)</span>
+                                </div>
+                                <div class="bg-amber-50/50 p-2 rounded">
+                                    <span class="block text-amber-800/60 text-[10px]">年底未滿 10 堂比例變現</span>
+                                    <span class="text-mumu-navy text-sm" id="detail-tail-pay">$0 元</span>
+                                    <span class="text-[10px] text-slate-400 block" id="detail-tail-text">(0 堂餘數)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Graphical Visual Breakdown of the Compensation Structure -->
+                        <div class="mt-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                            <span class="text-xs text-slate-400 font-bold block mb-3">報酬結構可視化比例圖 (基本 vs 獎勵金)</span>
+                            <div class="w-full bg-slate-100 h-6 rounded-full overflow-hidden flex shadow-inner">
+                                <div id="chart-base-bar" class="bg-mumu-navy h-full flex items-center justify-center text-[10px] text-white font-extrabold transition-all duration-500" style="width: 70%">課酬</div>
+                                <div id="chart-bonus-bar" class="bg-mumu-blueLight h-full flex items-center justify-center text-[10px] text-mumu-navy font-extrabold transition-all duration-500" style="width: 30%">獎助金</div>
+                            </div>
+                            <div class="flex justify-between items-center mt-2.5 text-[11px] font-semibold">
+                                <div class="flex items-center gap-1.5 text-mumu-navy">
+                                    <span class="w-3 h-3 bg-mumu-navy rounded"></span>
+                                    <span>基本課酬比例: <span id="chart-base-text">0%</span></span>
+                                </div>
+                                <div class="flex items-center gap-1.5 text-mumu-blue">
+                                    <span class="w-3 h-3 bg-mumu-blueLight rounded"></span>
+                                    <span>獎勵金加成比例: <span id="chart-bonus-text">0%</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub-metric: Effective Hourly Rate -->
+                        <div class="bg-mumu-navy text-white p-3.5 rounded-xl flex justify-between items-center">
+                            <div>
+                                <span class="text-[10px] text-teal-200 font-bold block uppercase">實際平均綜合堂數時薪</span>
+                                <span class="text-xs text-teal-200">（總金額 ÷ 總堂數）高於公定基本價！</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-mumu-orange font-bold">$</span>
+                                <span id="result-hourly" class="text-2xl font-black font-mono text-mumu-orange">0</span>
+                                <span class="text-xs text-white"> / 堂</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warning & Context text -->
+                    <p class="text-[11px] text-slate-400 italic mt-4 leading-relaxed font-medium">
+                        <i class="fa-solid fa-circle-exclamation mr-1 text-slate-500"></i><strong>計薪提醒：</strong>
+                        每年 12 月 31 日進行年度總結。未滿 10 堂之餘數，亦將依比例全額發清，隔年 1 月重新起算累計堂數。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Custom Elegant Alert Dialog / Modal -->
+    <div id="custom-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 m-4 shadow-2xl border border-slate-200 transform scale-95 transition-transform duration-300" id="modal-container">
+            <div class="text-center">
+                <!-- Icon Header -->
+                <div id="modal-icon-container" class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl text-mumu-navy">
+                    <i id="modal-icon" class="fa-solid fa-circle-check"></i>
+                </div>
+                
+                <!-- Content -->
+                <h3 id="modal-title" class="text-xl font-black text-mumu-navy mb-3">預設標題</h3>
+                <div id="modal-desc" class="text-sm text-slate-500 leading-relaxed mb-6 font-semibold">預設描述內容文字。</div>
+                
+                <!-- Actions -->
+                <div class="flex gap-3 justify-center">
+                    <button onclick="closeCustomModal()" class="bg-mumu-blue hover:bg-mumu-blueLight text-white font-bold px-6 py-2.5 rounded-full text-sm transition focus:outline-none shadow-md">
+                        我明白了
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Block: Reveal.js initialization and Interactive Tools Scripting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    
+    <script>
+        // Global State variables
+        let currentRank = 'cei-1'; // 'cei-1' or 'cei-2'
+        let revealDeck = null;
+
+        // On window load, initialize modules
+        window.onload = function() {
+            try {
+                // Safe checking if Reveal is defined to prevent Javascript blocking and layout crash
+                if (typeof Reveal !== 'undefined') {
+                    revealDeck = new Reveal({
+                        hash: true,
+                        center: true,
+                        transition: 'slide',
+                        width: 1050,
+                        height: 650,
+                        margin: 0.05,
+                        controls: true,
+                        progress: true,
+                        embedded: true
+                    });
+                    revealDeck.initialize().then(() => {
+                        adjustPresentationScale();
+                    });
+
+                    // Setup listeners to update dropdown on manual slide changes
+                    revealDeck.on('slidechanged', event => {
+                        const selectEl = document.getElementById('slide-jump');
+                        if (selectEl) selectEl.value = event.indexh;
+                    });
+                } else {
+                    // Failover if CDN is blocked / fails to load in preview sandbox
+                    console.warn("Reveal.js not loaded. Applying graceful fallback.");
+                    document.getElementById('view-presentation').innerHTML = `
+                        <div class="p-8 text-center text-white flex flex-col justify-center items-center h-full">
+                            <i class="fa-solid fa-triangle-exclamation text-4xl text-mumu-orange mb-4"></i>
+                            <p class="text-lg font-bold">簡報檢視暫時無法從遠端載入...</p>
+                            <p class="text-sm text-slate-400 mt-2">請確認網路連線。您仍可透過上方選單切換至「薪資試算」面板進行完整運算！</p>
+                            <div class="mt-6 flex gap-3">
+                                <button onclick="switchTab('calculator')" class="bg-mumu-blue hover:bg-mumu-blueLight text-white font-bold px-5 py-2.5 rounded-xl text-sm transition shadow-md">
+                                    前往薪資試算
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                console.error("Reveal initialization failed:", err);
+            }
+
+            // Adjust size to adapt immediately
+            adjustPresentationScale();
+            window.addEventListener('resize', adjustPresentationScale);
+
+            // Initialize salary calculator values
+            updateCalculator(120);
+        }
+
+        // Responsive scaling wrapper logic for Embedded Reveal.js
+        function adjustPresentationScale() {
+            const wrapper = document.getElementById('view-presentation');
+            const reveal = document.querySelector('.reveal');
+            if (!wrapper || !reveal) return;
+            
+            const wrapperWidth = wrapper.clientWidth;
+            const revealTargetWidth = 1050; // The defined slide width
+            const revealTargetHeight = 650; // The defined slide height
+
+            // Calculate ratio
+            if (wrapperWidth < 1100) {
+                const scale = (wrapperWidth - 24) / revealTargetWidth;
+                reveal.style.transform = `scale(${scale})`;
+                reveal.style.transformOrigin = 'top center';
+                
+                // Adjust parent height dynamically so that it fits nicely without white gaps
+                const computedHeight = Math.max(revealTargetHeight * scale, 350);
+                wrapper.style.height = (computedHeight + 48) + 'px';
+            } else {
+                reveal.style.transform = 'none';
+                wrapper.style.height = '700px';
+            }
+            
+            if (revealDeck && typeof revealDeck.layout === 'function') {
+                revealDeck.layout();
+            }
+        }
+
+        // Jump to specific slide in index
+        function jumpToSlide(index) {
+            if (revealDeck && typeof revealDeck.slide === 'function') {
+                revealDeck.slide(parseInt(index), 0);
+            }
+        }
+
+        // Toggle full screen container of slides
+        function toggleFullscreen() {
+            let elem = document.getElementById('view-presentation');
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch(err => {
+                    showCustomModal('全螢幕錯誤', '瀏覽器不支援 or 拒絕全螢幕操作：' + err.message, 'fa-triangle-exclamation', 'text-mumu-orange');
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Tab Switcher Controller
+        function switchTab(tabId) {
+            // Update active styles on tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + tabId).classList.add('active');
+
+            // Toggle corresponding views
+            document.getElementById('view-presentation').classList.add('hidden');
+            document.getElementById('view-calculator').classList.add('hidden');
+
+            if (tabId === 'presentation') {
+                document.getElementById('view-presentation').classList.remove('hidden');
+                adjustPresentationScale();
+            } else if (tabId === 'calculator') {
+                document.getElementById('view-calculator').classList.remove('hidden');
+            }
+        }
+
+        // Calculator Functions
+        function setCalcRank(rank) {
+            currentRank = rank;
+            let btn1 = document.getElementById('btn-calc-cei-1');
+            let btn2 = document.getElementById('btn-calc-cei-2');
+
+            if (rank === 'cei-1') {
+                btn1.className = "border-2 border-mumu-blue bg-teal-50/40 text-mumu-blue p-4 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition focus:outline-none shadow-sm";
+                btn2.className = "border-2 border-slate-200 hover:border-mumu-orange p-4 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition focus:outline-none";
+            } else {
+                btn2.className = "border-2 border-mumu-orange bg-amber-50 text-mumu-navy p-4 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition focus:outline-none shadow-sm";
+                btn1.className = "border-2 border-slate-200 hover:border-mumu-blue p-4 rounded-xl font-bold flex flex-col items-center justify-center gap-1 transition focus:outline-none";
+            }
+
+            // Recalculate
+            updateCalculator(document.getElementById('calc-slider').value);
+        }
+
+        function updateCalculatorFromInput(val) {
+            let max_val = 500;
+            let num = parseInt(val) || 0;
+            if (num > max_val) num = max_val;
+            if (num < 0) num = 0;
+            
+            document.getElementById('calc-slider').value = num;
+            updateCalculator(num);
+        }
+
+        function updateCalculator(sessions) {
+            sessions = parseInt(sessions) || 0;
+            
+            // Update input and slider sync
+            document.getElementById('calc-input-number').value = sessions;
+            document.getElementById('calc-slider').value = sessions;
+
+            let baseRate = 1200;
+            let basePay = sessions * baseRate;
+            let bonusPay = 0;
+            
+            // Multipliers (representing rate per single session for direct proportional breakdown)
+            let tier1Rate = (currentRank === 'cei-1') ? 220 : 380; // $2,200/10 vs $3,800/10
+            let tier2Rate = (currentRank === 'cei-1') ? 320 : 460; // $3,200/10 vs $4,600/10
+
+            // Advanced exact proportional division calculation (reflecting 12/31 Tail Release)
+            let milestoneSessions = Math.floor(sessions / 10) * 10;
+            let tailSessions = sessions % 10;
+            
+            let milestonePay = 0;
+            let tailPay = 0;
+
+            if (sessions <= 120) {
+                milestonePay = Math.floor(sessions / 10) * (tier1Rate * 10);
+                tailPay = tailSessions * tier1Rate;
+                bonusPay = milestonePay + tailPay;
+            } else {
+                // First 120 sessions always calculated at the tier-1 rate
+                let firstTierBonus = 120 * tier1Rate; // CEI-I: $26,400 | CEI-II: $45,600
+                let remainingSessions = sessions - 120;
+                
+                let remainingMilestone = Math.floor(remainingSessions / 10) * 10;
+                let remainingTail = remainingSessions % 10;
+                
+                milestonePay = firstTierBonus + (remainingMilestone * tier2Rate);
+                tailPay = remainingTail * tier2Rate;
+                bonusPay = milestonePay + tailPay;
+            }
+
+            let totalCompensation = basePay + bonusPay;
+            let effectiveHourly = sessions > 0 ? Math.round(totalCompensation / sessions) : baseRate;
+
+            // Render Output values with commas
+            document.getElementById('result-base').innerText = basePay.toLocaleString();
+            document.getElementById('result-bonus').innerText = bonusPay.toLocaleString();
+            document.getElementById('result-total').innerText = totalCompensation.toLocaleString();
+            document.getElementById('result-hourly').innerText = effectiveHourly.toLocaleString();
+
+            // Render Advanced breakdown cards
+            document.getElementById('detail-milestone-pay').innerText = '$' + milestonePay.toLocaleString() + ' 元';
+            document.getElementById('detail-milestone-text').innerText = `(${milestoneSessions} 堂整數)`;
+            document.getElementById('detail-tail-pay').innerText = '$' + tailPay.toLocaleString() + ' 元';
+            document.getElementById('detail-tail-text').innerText = `(${tailSessions} 堂年度尾數變現)`;
+
+            // Calculate ratios for the visualization bar chart
+            let baseRatio = 100;
+            let bonusRatio = 0;
+            if (totalCompensation > 0) {
+                baseRatio = Math.round((basePay / totalCompensation) * 100);
+                bonusRatio = 100 - baseRatio;
+            }
+
+            document.getElementById('chart-base-bar').style.width = baseRatio + '%';
+            document.getElementById('chart-bonus-bar').style.width = bonusRatio + '%';
+            document.getElementById('chart-base-text').innerText = baseRatio + '%';
+            document.getElementById('chart-bonus-text').innerText = bonusRatio + '%';
+
+            // Hide labels if too small to fit text safely
+            document.getElementById('chart-base-bar').innerText = baseRatio > 20 ? '基本課酬' : '';
+            document.getElementById('chart-bonus-bar').innerText = bonusRatio > 20 ? '獎助金' : '';
+
+            // Update Dynamic Status Threshold
+            let box = document.getElementById('threshold-status-box');
+            let icon = document.getElementById('threshold-icon');
+            let title = document.getElementById('threshold-title');
+            let desc = document.getElementById('threshold-desc');
+
+            let targetGoal = 120;
+            let rankName = (currentRank === 'cei-1') ? 'CEI-I 一級' : 'CEI-II 二級';
+
+            if (sessions < targetGoal) {
+                box.className = "p-4 rounded-xl border border-amber-200 bg-amber-50/20 flex items-start gap-3";
+                icon.innerHTML = "<i class='fa-solid fa-circle-exclamation text-amber-500 animate-pulse'></i>";
+                title.className = "font-bold text-sm text-amber-900";
+                title.innerText = `未達年度保級目標 (還差 ${targetGoal - sessions} 堂)`;
+                desc.innerText = `您目前完課 ${sessions} 堂，距離年度保級目標 ${targetGoal} 堂還差 ${targetGoal - sessions} 堂。達標即可在明年維持 ${rankName} 師資資格！`;
+            } else {
+                box.className = "p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 flex items-start gap-3";
+                icon.innerHTML = "<i class='fa-solid fa-circle-check text-emerald-600'></i>";
+                title.className = "font-bold text-sm text-emerald-900";
+                title.innerText = `已達成年度保級目標！`;
+                desc.innerText = `恭喜！您已順利完成當年度 ${sessions} 堂課，成功維持明年度 ${rankName} 師資資格。多上的每一堂課皆完美套用階梯式獎勵！`;
+            }
+        }
+
+        // Custom Modal Utility Functions
+        function showCustomModal(title, desc, iconClass = 'fa-circle-check', themeColorClass = 'text-mumu-navy') {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerHTML = desc;
+            
+            let icon = document.getElementById('modal-icon');
+            icon.className = `fa-solid ${iconClass}`;
+            
+            let iconContainer = document.getElementById('modal-icon-container');
+            iconContainer.className = `w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl ${themeColorClass} bg-slate-100`;
+
+            let modal = document.getElementById('custom-modal');
+            let container = document.getElementById('modal-container');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            container.classList.remove('scale-95');
+            container.classList.add('scale-100');
+        }
+
+        function closeCustomModal() {
+            let modal = document.getElementById('custom-modal');
+            let container = document.getElementById('modal-container');
+            
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+        }
+
+        // Triggered by slide 9 action button (Updated based on image_a1f044.png)
+        function triggerActivation() {
+            let desc = `
+                <div class="text-left space-y-3">
+                    <p>感謝各位夥伴！<strong>CEI眼動認證師資管理新制</strong> 已確認正式啟動。</p>
+                    <p>祝各位老師教學順心！有任何問題可隨時利用本頁面的「薪資試算」功能釐清，或與教務行政聯繫。</p>
+                </div>
+            `;
+            showCustomModal('🎉 新制同步啟動成功', desc, 'fa-circle-check', 'text-emerald-500');
+        }
+    </script>
+</body>
+</html>
