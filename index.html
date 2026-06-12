@@ -74,18 +74,6 @@
             color: #00A196;
         }
 
-        /* 簡報內文字型大小與行高 */
-        .reveal p {
-            font-size: 1.05rem !important;
-            line-height: 1.75 !important;
-            color: #475569 !important;
-        }
-
-        .reveal li {
-            font-size: 1rem !important;
-            line-height: 1.65 !important;
-        }
-
         /* 自訂高級卡片元件 */
         .info-card {
             background-color: #f8fafc;
@@ -188,9 +176,10 @@
         /* 簡報母容器動態縮放設定 */
         #view-presentation {
             transition: height 0.3s ease;
+            position: relative;
         }
         .reveal {
-            transform-origin: top center;
+            transform-origin: top left;
             transition: transform 0.3s ease;
         }
 
@@ -226,377 +215,388 @@
     </header>
 
     <!-- Main Content Container -->
-    <main class="flex-grow flex items-center justify-center py-6 px-4 md:px-6">
+    <main class="flex-grow flex flex-col items-center justify-center py-6 px-4 md:px-6 w-full max-w-6xl mx-auto">
 
         <!-- TAB 1: PRESENTATION VIEW -->
-        <div id="view-presentation" class="w-full max-w-6xl h-[700px] bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative border border-slate-700">
+        <div id="view-presentation-container" class="w-full flex flex-col items-center">
             
-            <!-- Quick Slide Navigation Bar Overlay -->
-            <div class="absolute top-4 left-4 z-40 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-full shadow-lg text-xs flex items-center gap-2 md:gap-4 border border-slate-200 max-w-[90%] overflow-hidden">
-                <span class="font-bold text-mumu-blue hidden md:inline-flex items-center gap-1"><i class="fa-solid fa-list"></i> 簡報大綱：</span>
-                <select id="slide-jump" onchange="jumpToSlide(this.value)" class="bg-transparent border-none text-slate-700 font-extrabold focus:ring-0 cursor-pointer text-xs focus:outline-none">
-                    <option value="0">1. 新制說明會封面</option>
-                    <option value="1">2. 核心設計原則</option>
-                    <option value="2">3. 職等與薪資結構</option>
-                    <option value="3">4. 年度資格維持條件</option>
-                    <option value="4">5. 晉升與降級回升</option>
-                    <option value="5">6. 行政與預審機制</option>
-                    <option value="6">7. 離職回歸復權辦法</option>
-                    <option value="7">8. 誠信合約與三大紅線</option>
-                    <option value="8">9. 啟動願景與結語</option>
-                </select>
+            <!-- Mobile Portrait Optimization Tip Banner (Only visible on mobile portrait viewports) -->
+            <div class="block md:hidden w-full bg-teal-50 border border-teal-150 text-mumu-blue text-xs font-bold px-4 py-3 rounded-2xl mb-4 flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-mobile-screen-button rotate-90 animate-pulse text-base"></i>
+                <span>建議橫過手機，或點擊簡報右上方 <i class="fa-solid fa-expand"></i> 全螢幕，字體更大更好閱讀！</span>
             </div>
 
-            <!-- Fullscreen Toggle Button -->
-            <button onclick="toggleFullscreen()" class="absolute top-4 right-4 z-40 bg-white/95 backdrop-blur-md hover:bg-white p-2.5 rounded-full shadow-lg text-slate-600 hover:text-mumu-blue transition border border-slate-200" title="切換全螢幕">
-                <i class="fa-solid fa-expand"></i>
-            </button>
+            <div id="view-presentation" class="w-full bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative border border-slate-700">
+                
+                <!-- Quick Slide Navigation Bar Overlay -->
+                <div class="absolute top-4 left-4 z-40 bg-white/95 backdrop-blur-md px-3 py-2 rounded-full shadow-lg text-[10px] sm:text-xs flex items-center gap-1 sm:gap-2 border border-slate-200 max-w-[75%] sm:max-w-[85%] overflow-hidden">
+                    <span class="font-bold text-mumu-blue hidden sm:inline-flex items-center gap-1"><i class="fa-solid fa-list"></i> 簡報大綱：</span>
+                    <select id="slide-jump" onchange="jumpToSlide(this.value)" class="bg-transparent border-none text-slate-700 font-extrabold focus:ring-0 cursor-pointer text-[10px] sm:text-xs focus:outline-none max-w-full">
+                        <option value="0">1. 新制說明會封面</option>
+                        <option value="1">2. 核心設計原則</option>
+                        <option value="2">3. 職等與薪資結構</option>
+                        <option value="3">4. 年度資格維持條件</option>
+                        <option value="4">5. 晉升與降級回升</option>
+                        <option value="5">6. 行政與預審機制</option>
+                        <option value="6">7. 離職回歸復權辦法</option>
+                        <option value="7">8. 誠信合約與三大紅線</option>
+                        <option value="8">9. 啟動願景與結語</option>
+                    </select>
+                </div>
 
-            <!-- Reveal.js Container -->
-            <div class="reveal h-full w-full">
-                <div class="slides">
+                <!-- Fullscreen Toggle Button -->
+                <button onclick="toggleFullscreen()" class="absolute top-4 right-4 z-40 bg-white/95 backdrop-blur-md hover:bg-white p-2 sm:p-2.5 rounded-full shadow-lg text-slate-600 hover:text-mumu-blue transition border border-slate-200" title="切換全螢幕">
+                    <i class="fa-solid fa-expand text-xs sm:text-sm"></i>
+                </button>
 
-                    <!-- Slide 1: Cover -->
-                    <section class="text-center flex flex-col justify-center items-center" style="border-top: 10px solid #00A196;" data-background-gradient="linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)">
-                        <div class="mb-6 text-6xl text-mumu-blue animate-bounce">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </div>
-                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-wide text-mumu-blue mb-4 px-4">
-                            CEI 認證眼動師資
-                        </h1>
-                        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-600 mb-8 whitespace-nowrap">
-                            全新薪資、晉升與考核制度說明會
-                        </h2>
-                        <div class="h-1.5 w-24 bg-mumu-orange mb-8 rounded-full"></div>
-                        <p class="text-lg text-slate-500 font-mono tracking-widest font-semibold">社團法人中華民國目目協會</p>
-                    </section>
+                <!-- Reveal.js Container -->
+                <div class="reveal h-full w-full">
+                    <div class="slides">
 
-                    <!-- Slide 2: Core Philosophy -->
-                    <section>
-                        <div class="slide-title"><i class="fa-solid fa-compass mr-3"></i>核心設計原則</div>
-                        <p class="text-slate-600 mb-6 -mt-3 text-base md:text-lg font-medium">不加班、不額外加案、回歸「教學品質」與「合約誠信」</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="info-card flex items-start gap-4">
-                                <div class="text-4xl text-mumu-blue mt-1"><i class="fa-solid fa-award"></i></div>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-2 text-mumu-blue">專業身份：終身認證資格</h4>
-                                    <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
-                                        只要通過實作考核並獲得 CEI 證書，您的<strong>「專業身分」將終身有效</strong>。
-                                        即使因個人規劃暫停接案，您的<strong>生涯總堂數</strong>將永久保留。
-                                    </p>
-                                </div>
+                        <!-- Slide 1: Cover -->
+                        <section class="text-center flex flex-col justify-center items-center" style="border-top: 10px solid #00A196;" data-background-gradient="linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)">
+                            <div class="mb-6 text-6xl text-mumu-blue animate-bounce">
+                                <i class="fa-solid fa-graduation-cap"></i>
                             </div>
-                            <div class="info-card flex items-start gap-4">
-                                <div class="text-4xl text-mumu-orange mt-1"><i class="fa-solid fa-calendar-check"></i></div>
-                                <div>
-                                    <h4 class="text-lg font-bold mb-2 text-mumu-blue">當期報酬：年度動態審查</h4>
-                                    <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
-                                        為了落實品質與對價，<strong>「獎勵金級距」採取年度制（每年 1/1 重新起算）</strong>。
-                                        維持穩定產能（年度 120 堂）並配合行政紀律的老師，<strong>即可</strong>享有高階獎勵加成。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 p-4 bg-teal-50/50 border-l-4 border-l-mumu-blue rounded-xl text-xs md:text-sm text-mumu-navy flex items-center gap-3">
-                            <i class="fa-solid fa-circle-info text-lg text-mumu-blue"></i>
-                            <span><strong>經營宗旨：</strong>我們不鼓勵暴增課量或犧牲生活，而是透過「120 堂基本年約」建立穩健的眼動教育生態。</span>
-                        </div>
-                    </section>
+                            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-wide text-mumu-blue mb-4 px-4">
+                                CEI 認證眼動師資
+                            </h1>
+                            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-600 mb-8 whitespace-nowrap">
+                                全新薪資、晉升與考核制度說明會
+                            </h2>
+                            <div class="h-1.5 w-24 bg-mumu-orange mb-8 rounded-full"></div>
+                            <p class="text-lg text-slate-500 font-mono tracking-widest font-semibold">社團法人中華民國目目協會</p>
+                        </section>
 
-                    <!-- Slide 3: Salary Structures -->
-                    <section>
-                        <div class="slide-title"><i class="fa-solid fa-sack-dollar mr-3"></i>最新師資職等與薪資結構</div>
-                        <p class="text-slate-600 mb-5 -mt-3 text-base font-medium">基本課酬配合二段式獎助金，領取資格清晰明確</p>
-                        
-                        <div class="overflow-x-auto">
-                            <table class="slide-table shadow-sm rounded-xl overflow-hidden border border-slate-150">
-                                <thead>
-                                    <tr>
-                                        <th class="rounded-tl-lg">階段與職等</th>
-                                        <th>合約期限</th>
-                                        <th>基本時薪</th>
-                                        <th class="rounded-tr-lg text-left pl-6">年度累積獎助金 (每 10 堂結算，隔年重新起算)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="font-bold text-slate-700">T0 培訓教師</td>
-                                        <td>30hr 培訓約</td>
-                                        <td>$1,000</td>
-                                        <td class="text-left pl-6 text-slate-400 italic">無獎助金</td>
-                                    </tr>
-                                    <tr class="bg-zebra">
-                                        <td class="font-bold text-slate-700">T1 儲備教師</td>
-                                        <td>半年一約</td>
-                                        <td>$1,200</td>
-                                        <td class="text-left pl-6 text-slate-400 italic">無獎助金</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-bold text-mumu-navy">CEI-Ⅰ 一級師資</td>
-                                        <td>定簽年約</td>
-                                        <td>$1,200</td>
-                                        <td class="text-left pl-6 font-semibold text-mumu-navy">
-                                            • 0 - 120 堂：每 10 堂加發 <strong>$2,200</strong> (+220/堂)<br>
-                                            • 121 堂以上：每 10 堂加發 <strong>$3,200</strong> (+320/堂)
-                                        </td>
-                                    </tr>
-                                    <tr class="bg-zebra">
-                                        <td class="font-bold text-mumu-navy rounded-bl-lg">CEI-Ⅱ 二級師資</td>
-                                        <td>定簽年約</td>
-                                        <td>$1,200</td>
-                                        <td class="text-left pl-6 font-semibold text-mumu-navy rounded-br-lg">
-                                            • 0 - 120 堂：每 10 堂加發 <strong>$3,800</strong> (+380/堂)<br>
-                                            • 121 堂以上 : 每 10 堂加發 <strong>$4,600</strong> (+460/堂)
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4 text-xs md:text-sm text-slate-400 italic flex items-center gap-1.5 font-medium">
-                            <i class="fa-solid fa-circle-question text-mumu-blue"></i>
-                            <span>* 註：每年度 12/31 結算時若累積尾數未滿 10 堂，剩餘堂數一律依比例全額發清，隔年 1/1 累積堂數自動歸零。可以使用上方「獎助金試算」功能進行試算！</span>
-                        </div>
-                    </section>
-
-                    <!-- Slide 4: Annual Goals -->
-                    <section>
-                        <div class="slide-title"><i class="fa-solid fa-list-check mr-3"></i>年度常態任務：資格維持條件</div>
-                        <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">每年年底結算，未達標者隔年強制調降一級（鎖定一年）</p>
-                        
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="info-card border-t-4 border-t-mumu-blue flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center gap-2 mb-4">
-                                        <span class="badge-amber bg-teal-50 text-mumu-blue text-sm py-1.5 px-3">CEI-Ⅰ 一級師資任務</span>
-                                    </div>
-                                    <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
-                                        <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
-                                        <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
-                                        <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
-                                    </ul>
-                                </div>
-                                <div class="text-xs md:text-sm text-mumu-blue font-bold bg-teal-50/50 p-2.5 rounded-lg border border-teal-200 mt-4">
-                                    維持一級資格期間，無須繳交個案報告！
-                                </div>
-                            </div>
+                        <!-- Slide 2: Core Philosophy -->
+                        <section>
+                            <div class="slide-title"><i class="fa-solid fa-compass mr-3"></i>核心設計原則</div>
+                            <p class="text-slate-600 mb-6 -mt-3 text-base md:text-lg font-medium">不加班、不額外加案、回歸「教學品質」與「合約誠信」</p>
                             
-                            <div class="info-card border-t-4 border-t-mumu-orange flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center gap-2 mb-4">
-                                        <span class="badge-amber bg-amber-50 text-mumu-navy text-sm py-1.5 px-3">CEI-Ⅱ 二級師資任務</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="info-card flex items-start gap-4">
+                                    <div class="text-4xl text-mumu-blue mt-1"><i class="fa-solid fa-award"></i></div>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 text-mumu-blue">專業身份：終身認證資格</h4>
+                                        <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
+                                            只要通過實作考核並獲得 CEI 證書，您的<strong>「專業身分」將終身有效</strong>。
+                                            即使因個人規劃暫停接案，您的<strong>生涯總堂數</strong>將永久保留。
+                                        </p>
                                     </div>
-                                    <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
-                                        <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
-                                        <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
-                                        <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
-                                    </ul>
                                 </div>
-                                <div class="text-xs md:text-sm text-mumu-navy font-bold bg-amber-50/50 p-2.5 rounded-lg border border-amber-200 mt-4 leading-relaxed">
-                                    <i class="fa-solid fa-file-invoice mr-1 text-mumu-orange"></i> <strong>專業品質指標（報告二選一）：</strong><br>
-                                    當年度需提交並通過 1 份個案報告（PECS實作 / 研習融入報告）。
+                                <div class="info-card flex items-start gap-4">
+                                    <div class="text-4xl text-mumu-orange mt-1"><i class="fa-solid fa-calendar-check"></i></div>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 text-mumu-blue">當期報酬：年度動態審查</h4>
+                                        <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
+                                            為了落實品質與對價，<strong>「獎勵金級距」採取年度制（每年 1/1 重新起算）</strong>。
+                                            維持穩定產能（年度 120 堂）並配合行政紀律的老師，<strong>即可</strong>享有高階獎勵加成。
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                            <div class="mt-6 p-4 bg-teal-50/50 border-l-4 border-l-mumu-blue rounded-xl text-xs md:text-sm text-mumu-navy flex items-center gap-3">
+                                <i class="fa-solid fa-circle-info text-lg text-mumu-blue"></i>
+                                <span><strong>經營宗旨：</strong>我們不鼓勵暴增課量或犧牲生活，而是透過「120 堂基本年約」建立穩健的眼動教育生態。</span>
+                            </div>
+                        </section>
 
-                    <!-- Slide 5: Promotion & Recovery -->
-                    <section class="!py-6">
-                        <!-- Removed single-quotes in the slide title as requested -->
-                        <div class="slide-title !mb-3"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>常態晉升與降級回升機制</div>
-                        <p class="text-slate-600 mb-3 -mt-2 text-sm font-medium">每年 12 月大盤點，次年 1 月 1 日正式生效（晉升/回升一律對齊同標準）</p>
-                        
-                        <div class="space-y-2">
-                            <!-- Compact Card 1 with Unified Readable Requirements Font Style -->
-                            <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
-                                <div class="flex items-center gap-4 flex-grow">
-                                    <div class="text-2xl text-mumu-blue flex-shrink-0"><i class="fa-solid fa-seedling animate-pulse"></i></div>
-                                    <div class="flex-grow flex flex-col">
-                                        <h4 class="font-bold text-mumu-blue text-sm">T1 儲備 ➔ 晉升 CEI-Ⅰ</h4>
-                                        <div class="flex flex-wrap gap-x-2 gap-y-1 mt-0.5 text-xs md:text-[13px] text-slate-500 font-medium">
-                                            <span class="whitespace-nowrap">1. 生涯總累積滿 60 堂</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">2. PECS 1~3階報告 1 份</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">3. 學生現況分析表 1 份</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">4. 修畢代幣課程</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">5. 完成年度必修教育時數</span>
+                        <!-- Slide 3: Salary Structures -->
+                        <section>
+                            <div class="slide-title"><i class="fa-solid fa-sack-dollar mr-3"></i>最新師資職等與薪資結構</div>
+                            <p class="text-slate-600 mb-5 -mt-3 text-base font-medium">基本課酬配合二段式獎助金，領取資格清晰明確</p>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="slide-table shadow-sm rounded-xl overflow-hidden border border-slate-150">
+                                    <thead>
+                                        <tr>
+                                            <th class="rounded-tl-lg">階段與職等</th>
+                                            <th>合約期限</th>
+                                            <th>基本時薪</th>
+                                            <th class="rounded-tr-lg text-left pl-6">年度累積獎助金 (每 10 堂結算，隔年重新起算)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-bold text-slate-700">T0 培訓教師</td>
+                                            <td>30hr 培訓約</td>
+                                            <td>$1,000</td>
+                                            <td class="text-left pl-6 text-slate-400 italic">無獎助金</td>
+                                        </tr>
+                                        <tr class="bg-zebra">
+                                            <td class="font-bold text-slate-700">T1 儲備教師</td>
+                                            <td>半年一約</td>
+                                            <td>$1,200</td>
+                                            <td class="text-left pl-6 text-slate-400 italic">無獎助金</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-bold text-mumu-navy">CEI-Ⅰ 一級師資</td>
+                                            <td>定簽年約</td>
+                                            <td>$1,200</td>
+                                            <td class="text-left pl-6 font-semibold text-mumu-navy">
+                                                • 0 - 120 堂：每 10 堂加發 <strong>$2,200</strong> (+220/堂)<br>
+                                                • 121 堂以上：每 10 堂加發 <strong>$3,200</strong> (+320/堂)
+                                            </td>
+                                        </tr>
+                                        <tr class="bg-zebra">
+                                            <td class="font-bold text-mumu-navy rounded-bl-lg">CEI-Ⅱ 二級師資</td>
+                                            <td>定簽年約</td>
+                                            <td>$1,200</td>
+                                            <td class="text-left pl-6 font-semibold text-mumu-navy rounded-br-lg">
+                                                • 0 - 120 堂：每 10 堂加發 <strong>$3,800</strong> (+380/堂)<br>
+                                                • 121 堂以上 : 每 10 堂加發 <strong>$4,600</strong> (+460/堂)
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-4 text-xs md:text-sm text-slate-400 italic flex items-center gap-1.5 font-medium">
+                                <i class="fa-solid fa-circle-question text-mumu-blue"></i>
+                                <span>* 註：每年度 12/31 結算時若累積尾數未滿 10 堂，剩餘堂數一律依比例全額發清，隔年 1/1 累積堂數自動歸零。可以使用上方「獎助金試算」功能進行試算！</span>
+                            </div>
+                        </section>
+
+                        <!-- Slide 4: Annual Goals -->
+                        <section>
+                            <div class="slide-title"><i class="fa-solid fa-list-check mr-3"></i>年度常態任務：資格維持條件</div>
+                            <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">每年年底結算，未達標者隔年強制調降一級（鎖定一年）</p>
+                            
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="info-card border-t-4 border-t-mumu-blue flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-4">
+                                            <span class="badge-amber bg-teal-50 text-mumu-blue text-sm py-1.5 px-3">CEI-Ⅰ 一級師資任務</span>
+                                        </div>
+                                        <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
+                                            <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
+                                            <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
+                                            <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-xs md:text-sm text-mumu-blue font-bold bg-teal-50/50 p-2.5 rounded-lg border border-teal-200 mt-4">
+                                        維持一級資格期間，無須繳交個案報告！
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card border-t-4 border-t-mumu-orange flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-4">
+                                            <span class="badge-amber bg-amber-50 text-mumu-navy text-sm py-1.5 px-3">CEI-Ⅱ 二級師資任務</span>
+                                        </div>
+                                        <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
+                                            <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
+                                            <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
+                                            <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-xs md:text-sm text-mumu-navy font-bold bg-amber-50/50 p-2.5 rounded-lg border border-amber-200 mt-4 leading-relaxed">
+                                        <i class="fa-solid fa-file-invoice mr-1 text-mumu-orange"></i> <strong>專業品質指標（報告二選一）：</strong><br>
+                                        當年度需提交並通過 1 份個案報告（PECS實作 / 研習融入報告）。
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Slide 5: Promotion & Recovery (Aligned text sizes and fonts perfectly - image_93c9c2.png) -->
+                        <section class="!py-6">
+                            <div class="slide-title !mb-3"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>常態晉升與降級回升機制</div>
+                            <p class="text-slate-600 mb-3 -mt-2 text-sm font-medium">每年 12 月大盤點，次年 1 月 1 日正式生效（晉升/回升一律對齊同標準）</p>
+                            
+                            <div class="space-y-2">
+                                <!-- Card 1 -->
+                                <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
+                                    <div class="flex items-center gap-4 flex-grow">
+                                        <div class="text-2xl text-mumu-blue flex-shrink-0"><i class="fa-solid fa-seedling animate-pulse"></i></div>
+                                        <div class="flex-grow flex flex-col">
+                                            <h4 class="font-bold text-mumu-blue text-sm">T1 儲備 ➔ 晉升 CEI-Ⅰ</h4>
+                                            <p class="flex flex-wrap gap-x-2 gap-y-1 mt-1 text-slate-600 font-medium" style="font-size: 14px !important;">
+                                                <span>1. 生涯總累積滿 60 堂</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>2. PECS 1~3階報告 1 份</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>3. 學生現況分析表 1 份</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>4. 修畢代幣課程</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>5. 完成年度必修教育時數</span>
+                                            </p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-right flex-shrink-0 ml-4">
-                                    <span class="badge-amber bg-teal-50 text-mumu-blue font-bold shadow-sm text-xs py-0.5 px-2 whitespace-nowrap">正式授證</span>
-                                </div>
-                            </div>
-
-                            <!-- Compact Card 2 with Unified Readable Requirements Font Style -->
-                            <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
-                                <div class="flex items-center gap-4 flex-grow">
-                                    <div class="text-2xl text-mumu-orange flex-shrink-0"><i class="fa-solid fa-crown"></i></div>
-                                    <div class="flex-grow flex flex-col">
-                                        <h4 class="font-bold text-mumu-navy text-sm">CEI-Ⅰ ➔ 晉升 CEI-Ⅱ</h4>
-                                        <div class="flex flex-wrap gap-x-2 gap-y-1 mt-0.5 text-xs md:text-[13px] text-slate-500 font-medium">
-                                            <span class="whitespace-nowrap">1. 生涯總累積滿 240 堂</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">2. PECS 1~3階報告 1 份</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">3. 研討融入報告 1 份</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">4. 修畢 PECS 4 課程</span>
-                                            <span class="text-slate-300">|</span>
-                                            <span class="whitespace-nowrap">5. 完成年度必修教育時數</span>
-                                        </div>
+                                    <div class="text-right flex-shrink-0 ml-4">
+                                        <span class="badge-amber bg-teal-50 text-mumu-blue font-bold shadow-sm text-sm py-1 px-3 whitespace-nowrap rounded-lg">正式授證</span>
                                     </div>
                                 </div>
-                                <div class="text-right flex-shrink-0 ml-4">
-                                    <span class="badge-amber bg-amber-50 text-mumu-navy font-bold shadow-sm text-xs py-0.5 px-2 whitespace-nowrap">解鎖高額獎助金</span>
+
+                                <!-- Card 2 -->
+                                <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
+                                    <div class="flex items-center gap-4 flex-grow">
+                                        <div class="text-2xl text-mumu-orange flex-shrink-0"><i class="fa-solid fa-crown"></i></div>
+                                        <div class="flex-grow flex flex-col">
+                                            <h4 class="font-bold text-mumu-navy text-sm">CEI-Ⅰ ➔ 晉升 CEI-Ⅱ</h4>
+                                            <p class="flex flex-wrap gap-x-2 gap-y-1 mt-1 text-slate-600 font-medium" style="font-size: 14px !important;">
+                                                <span>1. 生涯總累積滿 240 堂</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>2. PECS 1~3階報告 1 份</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>3. 研討融入報告 1 份</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>4. 修畢 PECS 4 課程</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>5. 完成年度必修教育時數</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right flex-shrink-0 ml-4">
+                                        <span class="badge-amber bg-amber-50 text-mumu-navy font-bold shadow-sm text-sm py-1 px-3 whitespace-nowrap rounded-lg">解鎖高額獎助金</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Compact Card 3: Downgrade Recovery with optimized sizing to completely fit inside Reveal.js context -->
-                            <div class="info-card bg-amber-50/20 border-amber-200 !py-2.5 !px-4 shadow-sm">
-                                <h4 class="font-bold text-mumu-navy flex items-center gap-2 mb-0.5 text-sm">
-                                    <i class="fa-solid fa-arrows-spin text-mumu-blue"></i> 降級後回升原職級規定
-                                </h4>
-                                <p class="text-[11px] lg:text-xs text-slate-600 leading-relaxed font-medium">
-                                    因降級者之「生涯總累積堂數」已跨越門檻，<strong>無需重新累積總堂數</strong>。
-                                    被降級的這一年，<strong>老師須達成當年度常態任務，並於盤點期前完成目標職級晉升所需之所有個案報告與培訓任務</strong>，即可於次年 1 月 1 日正式回升。
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Slide 6: December Audit -->
-                    <section>
-                        <div class="slide-title"><i class="fa-solid fa-calendar-days mr-3"></i>行政對帳與「12/19 預審機制」</div>
-                        <p class="text-slate-600 mb-5 -mt-3 text-base font-medium">配合每月 19 號切帳與次月 5 號發薪之常態流程，實施預審與結算制度</p>
-                        
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="info-card border-l-4 border-l-mumu-blue flex flex-col justify-between">
-                                <div>
-                                    <h4 class="font-bold text-mumu-blue mb-2 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-calculator"></i> 12 月 19 日：年底大盤點與預審
+                                <!-- Card 3: Downgrade Recovery (Inline styled to strictly force 14px - image_93c9c2.png) -->
+                                <div class="info-card bg-amber-50/20 border-amber-200 !py-2.5 !px-4 shadow-sm">
+                                    <h4 class="font-bold text-mumu-navy flex items-center gap-2 mb-1 text-sm">
+                                        <i class="fa-solid fa-arrows-spin text-mumu-blue"></i> 降級後回升原職級規定
                                     </h4>
-                                    <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
-                                        <li><strong>預審公式：</strong> <code>1/1 ~ 12/19 實際堂數</code> + <code>12/20 ~ 12/31 系統排課數</code></li>
-                                        <li><strong>提前判定：</strong> 兩者相加滿 120 堂即判定達標，保留明年原職等與續約資格。</li>
-                                    </ul>
-                                </div>
-                                <div class="bg-red-50 p-2.5 rounded-lg text-red-900 border border-red-100 text-xs leading-relaxed mt-2">
-                                    <strong>安全防護補丁：</strong> 若預審通過後因自身因素取消課程未補課，導致整年未滿 120 堂，原資格無效並追溯降級與扣回差額。
-                                </div>
-                            </div>
-
-                            <div class="info-card border-l-4 border-l-emerald-600 flex flex-col justify-between">
-                                <div>
-                                    <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-repeat"></i> 1 月 19 日：跨年堂數與獎金拆分
-                                    </h4>
-                                    <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
-                                        <li><strong>舊年度尾數全變現：</strong> <code>12/20 ~ 12/31</code> 的堂數計入舊年度。在 1/19 結算時，不論累積餘數是否滿 10 堂，一律依舊年度最終費率等比例變現發清，舊累計堂數正式歸零。</li>
-                                        <li><strong>新年度全新起跑：</strong> <code>1/1 ~ 1/19</code> 上的課，則直接歸入新年度，重新起算每 10 堂的結算旅程。</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Slide 7: Rehire Policy -->
-                    <section>
-                        <div class="slide-title"><i class="fa-solid fa-rotate mr-3"></i>離職回歸與復權管理辦法</div>
-                        
-                        <div class="space-y-3">
-                            <div class="p-3 bg-slate-50 hover:bg-slate-100 transition border border-slate-200 rounded-xl flex items-center justify-between">
-                                <div class="text-sm font-bold text-slate-800 w-48 flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
-                                    <span>1. 中斷服務【半年內】</span>
-                                </div>
-                                <p class="text-xs md:text-sm text-slate-600 w-3/4 leading-relaxed font-medium">
-                                    <strong>直接回歸原職級</strong>。年底考核目標採純比例減免：<strong>當年度剩餘月份 × 10 堂</strong>。<br>
-                                    達標者隔年維持原職級，未達標者隔年強制降一級。
-                                </p>
-                            </div>
-                            <div class="p-3 bg-teal-50/50 hover:bg-teal-50 transition border border-teal-100 rounded-xl flex items-center justify-between">
-                                <div class="text-sm font-bold text-mumu-blue w-48 flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-mumu-blueLight"></span>
-                                    <span>2. 離職【半年至一年內】</span>
-                                </div>
-                                <p class="text-xs md:text-sm text-slate-600 w-3/4 leading-relaxed font-medium">
-                                    <strong>強制降一級落腳發薪</strong>。年底考核目標同樣採 <strong>剩餘月份 × 10 堂</strong> 計算。<br>
-                                    只要年底提交高階個案報告並通過審查，隔年 1/1 正式復權、重返原職級！
-                                </p>
-                            </div>
-                            <div class="p-3 bg-amber-50/50 hover:bg-amber-50 transition border border-amber-100 rounded-xl flex flex-col md:flex-row items-start justify-between gap-3">
-                                <div class="text-sm font-bold text-mumu-navy w-48 flex items-center gap-2 mt-1">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-mumu-orange animate-pulse"></span>
-                                    <span>3. 離職【一年以上】</span>
-                                </div>
-                                <!-- Unified clean bullet lists for Year-plus Rejoining, entirely free of standalone boxes/cards as requested -->
-                                <div class="text-xs md:text-sm text-slate-600 w-full md:w-3/4 leading-relaxed font-medium space-y-1">
-                                    <div>• <strong>回歸當下職級</strong>：回歸初次派案一律由 <strong>T1 (儲備師資)</strong> 起跑，領取基礎課酬。</div>
-                                    <div>• <strong>歸隊必備條件</strong>：需補齊中斷期間之最新必修核心課程，並通過督導前期檢核即可重新排課。</div>
-                                    <div class="pt-1">• <strong>年底考核目標</strong>：</div>
-                                    <ul class="list-disc pl-8 space-y-0.5 text-xs text-slate-600">
-                                        <li>生涯總堂數滿 <strong>240 堂</strong>以上 ➔ 可申請晉升 <strong>C2</strong> 並繳交相關晉升申請資料。</li>
-                                        <li>生涯總堂數滿 <strong>60 堂</strong>以上 ➔ 可申請晉升 <strong>C1</strong> 並繳交相關晉升申請資料。</li>
-                                        <li>生涯總堂數未滿 60 堂、個案數未符合 ➔ 留任 <strong>T1</strong> 級別。</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Slide 8: Compliance & Red Lines -->
-                    <section>
-                        <div class="slide-title"><i class="fa-solid fa-shield-halved mr-3"></i>誠信合約與三大防禦紅線</div>
-                        <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">行政延誤採「暫停發放」而非扣款；惡意違約設有懲罰與違約金</p>
-                        
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="info-card border-t-4 border-t-mumu-blue flex flex-col justify-between">
-                                <div>
-                                    <h4 class="font-bold text-mumu-blue mb-3 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-envelope-open-text"></i> 1. 行政配合違失
-                                    </h4>
-                                    <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
-                                        每次上課需於 1 週內完成日誌與影片繳交。若無故遲交達 2 星期以上：<br>
-                                        • <strong>即時處置 (暫停撥款)</strong>：直接暫停發放該期課酬，補齊後的下個月一併恢復補發。<br>
-                                        • <strong>年度處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 3 次或以上</strong>，年底大審強制降級，鎖定一年。
+                                    <p class="text-slate-600 leading-relaxed font-medium" style="font-size: 14px !important;">
+                                        因降級者之「生涯總累積堂數」已跨越門檻，<strong>無需重新累積總堂數</strong>。被降級的這一年，<strong>老師須達成當年度常態任務，並於盤點期前完成目標職級晉升所需之所有個案報告與培訓任務</strong>，即可於次年 1 月 1 日正式回升。
                                     </p>
                                 </div>
                             </div>
+                        </section>
 
-                            <div class="info-card border-t-4 border-t-red-600 bg-red-50/50 flex flex-col justify-between">
-                                <div>
-                                    <h4 class="font-bold text-red-900 mb-3 flex items-center gap-1.5">
-                                        <i class="fa-solid fa-triangle-exclamation"></i> 2. 嚴重違約行為 (損害商譽與利益衝突)
-                                    </h4>
-                                    <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
-                                        出現下列情事，協會得立即解約並追究損害賠償與 15% 懲罰性違約金：<br>
-                                        • <strong>私下授課限制</strong>：私自與媒合個案簽訂私契、私下教授眼動課、私用目目軟硬體設備進行私人教學。<br>
-                                        • <strong>無故丟包個案</strong>：無故丟包個案、中途失聯，損害學員權益。<br>
-                                        • <strong>專業醫療例外</strong>：非眼動課時間的常態物理/職能/語言復健服務完全合規，<strong>但</strong>嚴禁在私人服務中使用目目財產。
-                                    </p>
+                        <!-- Slide 6: December Audit -->
+                        <section>
+                            <div class="slide-title"><i class="fa-solid fa-calendar-days mr-3"></i>行政對帳與「12/19 預審機制」</div>
+                            <p class="text-slate-600 mb-5 -mt-3 text-base font-medium">配合每月 19 號切帳與次月 5 號發薪之常態流程，實施預審與結算制度</p>
+                            
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="info-card border-l-4 border-l-mumu-blue flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-mumu-blue mb-2 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-calculator"></i> 12 月 19 日：年底大盤點與預審
+                                        </h4>
+                                        <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
+                                            <li><strong>預審公式：</strong> <code>1/1 ~ 12/19 實際堂數</code> + <code>12/20 ~ 12/31 系統排課數</code></li>
+                                            <li><strong>提前判定：</strong> 兩者相加滿 120 堂即判定達標，保留明年原職等與續約資格。</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-red-50 p-2.5 rounded-lg text-red-900 border border-red-100 text-xs leading-relaxed mt-2">
+                                        <strong>安全防護補丁：</strong> 若預審通過後因自身因素取消課程未補課，導致整年未滿 120 堂，原資格無效並追溯降級與扣回差額。
+                                    </div>
+                                </div>
+
+                                <div class="info-card border-l-4 border-l-emerald-600 flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-repeat"></i> 1 月 19 日：跨年堂數與獎金拆分
+                                        </h4>
+                                        <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
+                                            <li><strong>舊年度尾數全變現：</strong> <code>12/20 ~ 12/31</code> 的堂數計入舊年度。在 1/19 結算時，不論累積餘數是否滿 10 堂，一律依舊年度最終費率等比例變現發清，舊累計堂數正式歸零。</li>
+                                            <li><strong>新年度全新起跑：</strong> <code>1/1 ~ 1/19</code> 上的課，則直接歸入新年度，重新起算每 10 堂的結算旅程。</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    <!-- Slide 9: Closing -->
-                    <section class="text-center flex flex-col justify-center items-center" data-background-color="#00A196" style="border-top: none;">
-                        <div class="text-mumu-orange text-2xl md:text-3xl mb-6 font-black tracking-wider">
-                            「資格認證是終身的，執業等級是動態的。」
-                        </div>
-                        <p class="text-teal-50 text-sm md:text-base mb-10 max-w-2xl leading-relaxed font-semibold">
-                            目目全新師資體系，致力於在不增加夥伴工作負擔、不強求加班的前提下，<br>
-                            透過清晰透明的晉升階梯與合理回饋，與各位老師一同守護孩子的眼動教育。
-                        </p>
-                        <button onclick="triggerActivation()" class="bg-mumu-orange text-mumu-navy px-8 py-3.5 rounded-full font-bold shadow-lg transition-all duration-300 transform hover:scale-105 hover:bg-amber-300 focus:outline-none flex items-center gap-2 text-base">
-                            <i class="fa-solid fa-circle-check"></i> 同步啟動新制
-                        </button>
-                    </section>
+                        <!-- Slide 7: Rehire Policy (Left titles: Larger, Color unified; Right body: Smaller, font sizes unified - image_93c65e.png) -->
+                        <section>
+                            <div class="slide-title"><i class="fa-solid fa-rotate mr-3"></i>離職回歸與復權管理辦法</div>
+                            
+                            <div class="space-y-2.5">
+                                <!-- Item 1 -->
+                                <div class="p-3 bg-slate-50 hover:bg-slate-100 transition border border-slate-200 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                                    <div class="flex items-center gap-2 flex-shrink-0 w-full md:w-52" style="font-size: 15px !important; color: #1E293B !important; font-weight: 900 !important;">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
+                                        <span>1. 中斷服務【半年內】</span>
+                                    </div>
+                                    <p class="w-full md:w-3/4 leading-relaxed font-medium" style="font-size: 12px !important; color: #475569 !important;">
+                                        <strong>直接回歸原職級</strong>。年底考核目標採純比例減免：<strong>當年度剩餘月份 × 10 堂</strong>。<br>
+                                        達標者隔年維持原職級，未達標者隔年強制降一級。
+                                    </p>
+                                </div>
+                                
+                                <!-- Item 2 -->
+                                <div class="p-3 bg-teal-50/50 hover:bg-teal-50 transition border border-teal-100 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                                    <div class="flex items-center gap-2 flex-shrink-0 w-full md:w-52" style="font-size: 15px !important; color: #1E293B !important; font-weight: 900 !important;">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-mumu-blueLight"></span>
+                                        <span>2. 離職【半年至一年內】</span>
+                                    </div>
+                                    <p class="w-full md:w-3/4 leading-relaxed font-medium" style="font-size: 12px !important; color: #475569 !important;">
+                                        <strong>強制降一級落腳發薪</strong>。年底考核目標同樣採 <strong>剩餘月份 × 10 堂</strong> 計算。<br>
+                                        只要年底提交高階個案報告並通過審查，隔年 1/1 正式復權、重返原職級！
+                                    </p>
+                                </div>
+                                
+                                <!-- Item 3 -->
+                                <div class="p-3 bg-amber-50/50 hover:bg-amber-50 transition border border-amber-100 rounded-xl flex flex-col md:flex-row items-start justify-between gap-3">
+                                    <div class="flex items-center gap-2 flex-shrink-0 w-full md:w-52 mt-1" style="font-size: 15px !important; color: #1E293B !important; font-weight: 900 !important;">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-mumu-orange animate-pulse"></span>
+                                        <span>3. 離職【一年以上】</span>
+                                    </div>
+                                    <div class="w-full md:w-3/4 leading-relaxed font-medium space-y-1" style="font-size: 12px !important; color: #475569 !important;">
+                                        <div>• <strong>回歸當下職級</strong>：回歸初次派案一律由 <strong>T1 (儲備師資)</strong> 起跑，領取基礎課酬。</div>
+                                        <div>• <strong>歸隊必備條件</strong>：需補齊中斷期間之最新必修核心課程，並通過督導前期檢核即可重新排課。</div>
+                                        <div class="pt-1">• <strong>年底考核目標</strong>：</div>
+                                        <ul class="list-disc pl-8 space-y-0.5" style="font-size: 12px !important; color: #475569 !important;">
+                                            <li style="font-size: 12px !important;">生涯總堂數滿 <strong>240 堂</strong>以上 ➔ 可申請晉升 <strong>C2</strong> 並繳交相關晉升申請資料。</li>
+                                            <li style="font-size: 12px !important;">生涯總堂數滿 <strong>60 堂</strong>以上 ➔ 可申請晉升 <strong>C1</strong> 並繳交相關晉升申請資料。</li>
+                                            <li style="font-size: 12px !important;">生涯總堂數未滿 60 堂、個案數未符合 ➔ 留任 <strong>T1</strong> 級別。</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
+                        <!-- Slide 8: Compliance & Red Lines -->
+                        <section>
+                            <div class="slide-title"><i class="fa-solid fa-shield-halved mr-3"></i>誠信合約與三大防禦紅線</div>
+                            <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">行政延誤採「暫停發放」而非扣款；惡意違約設有懲罰與違約金</p>
+                            
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="info-card border-t-4 border-t-mumu-blue flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-mumu-blue mb-3 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-envelope-open-text"></i> 1. 行政配合違失
+                                        </h4>
+                                        <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
+                                            每次上課需於 1 週內完成日誌與影片繳交。若無故遲交達 2 星期以上：<br>
+                                            • <strong>即時處置 (暫停撥款)</strong>：直接暫停發放該期課酬，補齊後的下個月一併恢復補發。<br>
+                                            • <strong>年度處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 3 次或以上</strong>，年底大審強制降級，鎖定一年。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="info-card border-t-4 border-t-red-600 bg-red-50/50 flex flex-col justify-between">
+                                    <div>
+                                        <h4 class="font-bold text-red-900 mb-3 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-triangle-exclamation"></i> 2. 嚴重違約行為 (損害商譽與利益衝突)
+                                        </h4>
+                                        <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
+                                            出現下列情事，協會得立即解約並追究損害賠償與 15% 懲罰性違約金：<br>
+                                            • <strong>私下授課限制</strong>：私自與媒合個案簽訂私契、私下教授眼動課、私用目目軟硬體設備進行私人教學。<br>
+                                            • <strong>無故丟包個案</strong>：無故丟包個案、中途失聯，損害學員權益。<br>
+                                            • <strong>專業醫療例外</strong>：非眼動課時間的常態物理/職能/語言復健服務完全合規，<strong>打擊嚴重違約</strong>嚴禁在私人服務中使用目目財產。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Slide 9: Closing -->
+                        <section class="text-center flex flex-col justify-center items-center" data-background-color="#00A196" style="border-top: none;">
+                            <div class="text-mumu-orange text-2xl md:text-3xl mb-6 font-black tracking-wider">
+                                「資格認證是終身的，執業等級是動態的。」
+                            </div>
+                            <p class="text-teal-50 text-sm md:text-base mb-10 max-w-2xl leading-relaxed font-semibold">
+                                目目全新師資體系，致力於在不增加夥伴工作負擔、不強求加班的前提下，<br>
+                                透過清晰透明的晉升階梯與合理回饋，與各位老師一同守護孩子的眼動教育。
+                            </p>
+                            <button onclick="triggerActivation()" class="bg-mumu-orange text-mumu-navy px-8 py-3.5 rounded-full font-bold shadow-lg transition-all duration-300 transform hover:scale-105 hover:bg-amber-300 focus:outline-none flex items-center gap-2 text-base">
+                                <i class="fa-solid fa-circle-check"></i> 同步啟動新制
+                            </button>
+                        </section>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -672,7 +672,6 @@
                     <div class="space-y-4">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-extrabold text-slate-500 uppercase tracking-widest"><i class="fa-solid fa-chart-pie mr-1 text-mumu-blue"></i>年度薪資收益總覽</h3>
-                            <!-- Fixed: Added missing onclick handler with function restored -->
                             <button onclick="copyCalculatorReport()" class="text-xs text-teal-800 hover:text-teal-950 font-bold flex items-center gap-1 bg-teal-50 hover:bg-teal-100 px-2.5 py-1.5 rounded-lg border border-teal-100 transition">
                                 <i class="fa-solid fa-copy"></i> <span>複製試算報告</span>
                             </button>
@@ -857,29 +856,27 @@
             updateCalculator(120);
         }
 
-        // Responsive scaling wrapper logic for Embedded Reveal.js
+        // Responsive scaling wrapper logic for Embedded Reveal.js (Completely refactored to eliminate double-scaling on mobile)
         function adjustPresentationScale() {
             const wrapper = document.getElementById('view-presentation');
             const reveal = document.querySelector('.reveal');
             if (!wrapper || !reveal) return;
             
             const wrapperWidth = wrapper.clientWidth;
-            const revealTargetWidth = 1050; // The defined slide width
-            const revealTargetHeight = 650; // The defined slide height
+            const revealTargetWidth = 1050; // The defined slide layout width
+            const revealTargetHeight = 650; // The defined slide layout height
 
-            // Calculate ratio
-            if (wrapperWidth < 1100) {
-                const scale = (wrapperWidth - 24) / revealTargetWidth;
-                reveal.style.transform = `scale(${scale})`;
-                reveal.style.transformOrigin = 'top center';
-                
-                // Adjust parent height dynamically so that it fits nicely without white gaps
-                const computedHeight = Math.max(revealTargetHeight * scale, 350);
-                wrapper.style.height = (computedHeight + 48) + 'px';
-            } else {
-                reveal.style.transform = 'none';
-                wrapper.style.height = '700px';
-            }
+            // Compute exact scale ratio based on container width
+            const scale = wrapperWidth / revealTargetWidth;
+
+            // Apply scale transform and force exact layout dimensions on .reveal to align properly
+            reveal.style.width = revealTargetWidth + 'px';
+            reveal.style.height = revealTargetHeight + 'px';
+            reveal.style.transform = `scale(${scale})`;
+            reveal.style.transformOrigin = 'top left';
+
+            // Dynamically compute wrapper container height to fit the scaled canvas perfectly
+            wrapper.style.height = (revealTargetHeight * scale) + 'px';
             
             if (revealDeck && typeof revealDeck.layout === 'function') {
                 revealDeck.layout();
@@ -912,11 +909,11 @@
             document.getElementById('btn-' + tabId).classList.add('active');
 
             // Toggle corresponding views
-            document.getElementById('view-presentation').classList.add('hidden');
+            document.getElementById('view-presentation-container').classList.add('hidden');
             document.getElementById('view-calculator').classList.add('hidden');
 
             if (tabId === 'presentation') {
-                document.getElementById('view-presentation').classList.remove('hidden');
+                document.getElementById('view-presentation-container').classList.remove('hidden');
                 adjustPresentationScale();
             } else if (tabId === 'calculator') {
                 document.getElementById('view-calculator').classList.remove('hidden');
@@ -1046,7 +1043,7 @@
             }
         }
 
-        // Fixed: Fully restored copy calculator report utility with iframe-safe clipboard logic
+        // Safe copy calculation report utility for browser sandbox iframe
         function copyCalculatorReport() {
             let sessions = document.getElementById('calc-input-number').value;
             let rankText = currentRank === 'cei-1' ? 'CEI-I 一級師資' : 'CEI-II 二級師資';
@@ -1065,7 +1062,6 @@
             reportStr += `★ 實際平均每堂綜合時薪：$${hourlyPay} 元 / 堂 (超越基本時薪 $1,200)\n`;
             reportStr += `※ 本數據為新制系統預估，實際應以最終年終對帳發放金額為主。`;
 
-            // Iframe sandbox compatible clipboard copy logic
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = reportStr;
             tempTextArea.style.position = 'fixed';
@@ -1082,7 +1078,7 @@
                     throw new Error('execCommand copy failed');
                 }
             } catch (err) {
-                showCustomModal('⚠️ 複製失敗', '無法自動複製文字。請手動複製數據。', 'fa-triangle-exclamation', 'text-amber-500');
+                showCustomModal('⚠️ 複製失敗', '無法複製文字。請手動複製數據。', 'fa-triangle-exclamation', 'text-amber-500');
             }
             
             document.body.removeChild(tempTextArea);
