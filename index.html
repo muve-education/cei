@@ -402,7 +402,7 @@
 
                     <!-- Slide 5: Promotion & Recovery -->
                     <section class="!py-6">
-                        <!-- Removed single-quotes in the slide title -->
+                        <!-- Removed single-quotes in the slide title as requested -->
                         <div class="slide-title !mb-3"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>常態晉升與降級回升機制</div>
                         <p class="text-slate-600 mb-3 -mt-2 text-sm font-medium">每年 12 月大盤點，次年 1 月 1 日正式生效（晉升/回升一律對齊同標準）</p>
                         
@@ -562,7 +562,7 @@
                                     <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
                                         每次上課需於 1 週內完成日誌與影片繳交。若無故遲交達 2 星期以上：<br>
                                         • <strong>即時處置 (暫停撥款)</strong>：直接暫停發放該期課酬，補齊後的下個月一併恢復補發。<br>
-                                        • <strong>年度處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 3 次 or 以上</strong>，年底大審強制降級，鎖定一年。
+                                        • <strong>年度處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 3 次或以上</strong>，年底大審強制降級，鎖定一年。
                                     </p>
                                 </div>
                             </div>
@@ -672,6 +672,7 @@
                     <div class="space-y-4">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-extrabold text-slate-500 uppercase tracking-widest"><i class="fa-solid fa-chart-pie mr-1 text-mumu-blue"></i>年度薪資收益總覽</h3>
+                            <!-- Fixed: Added missing onclick handler with function restored -->
                             <button onclick="copyCalculatorReport()" class="text-xs text-teal-800 hover:text-teal-950 font-bold flex items-center gap-1 bg-teal-50 hover:bg-teal-100 px-2.5 py-1.5 rounded-lg border border-teal-100 transition">
                                 <i class="fa-solid fa-copy"></i> <span>複製試算報告</span>
                             </button>
@@ -1043,6 +1044,48 @@
                 title.innerText = `已達成年度保級目標！`;
                 desc.innerText = `恭喜！您已順利完成當年度 ${sessions} 堂課，成功維持明年度 ${rankName} 師資資格。多上的每一堂課皆完美套用階梯式獎勵！`;
             }
+        }
+
+        // Fixed: Fully restored copy calculator report utility with iframe-safe clipboard logic
+        function copyCalculatorReport() {
+            let sessions = document.getElementById('calc-input-number').value;
+            let rankText = currentRank === 'cei-1' ? 'CEI-I 一級師資' : 'CEI-II 二級師資';
+            let basePay = document.getElementById('result-base').innerText;
+            let bonusPay = document.getElementById('result-bonus').innerText;
+            let totalPay = document.getElementById('result-total').innerText;
+            let hourlyPay = document.getElementById('result-hourly').innerText;
+
+            let reportStr = `【目目 新制眼動師資預估報酬報告】\n`;
+            reportStr += `• 執業等級：${rankText}\n`;
+            reportStr += `• 預期年度授課數：${sessions} 堂\n`;
+            reportStr += `-------------------------------\n`;
+            reportStr += `• 基礎課酬估計：$${basePay} 元\n`;
+            reportStr += `• 累積段位獎助金：$${bonusPay} 元 (含年底尾數比例發清)\n`;
+            reportStr += `★ 年度預估薪資報酬總計：$${totalPay} 元\n`;
+            reportStr += `★ 實際平均每堂綜合時薪：$${hourlyPay} 元 / 堂 (超越基本時薪 $1,200)\n`;
+            reportStr += `※ 本數據為新制系統預估，實際應以最終年終對帳發放金額為主。`;
+
+            // Iframe sandbox compatible clipboard copy logic
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = reportStr;
+            tempTextArea.style.position = 'fixed';
+            tempTextArea.style.opacity = '0';
+            document.body.appendChild(tempTextArea);
+            tempTextArea.focus();
+            tempTextArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCustomModal('📋 複製成功', '您的薪資試算報告已成功複製至剪貼簿！可直接貼上分享 or 儲存紀錄。', 'fa-circle-check', 'text-emerald-700');
+                } else {
+                    throw new Error('execCommand copy failed');
+                }
+            } catch (err) {
+                showCustomModal('⚠️ 複製失敗', '無法自動複製文字。請手動複製數據。', 'fa-triangle-exclamation', 'text-amber-500');
+            }
+            
+            document.body.removeChild(tempTextArea);
         }
 
         // Custom Modal Utility Functions
