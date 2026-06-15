@@ -74,6 +74,11 @@
             color: #00A196;
         }
 
+        /* 移除 Reveal 的預設 P 與 LI 邊距與字體干擾，完全交給 Tailwind */
+        .reveal p, .reveal li {
+            line-height: 1.75 !important;
+        }
+
         /* 自訂高級卡片元件 */
         .info-card {
             background-color: #f8fafc;
@@ -87,10 +92,6 @@
             border-color: #FFC53D;
             box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.05);
             transform: translateY(-2px);
-        }
-
-        .info-card h4 {
-            font-size: 1.15rem !important;
         }
 
         .badge-amber {
@@ -179,7 +180,7 @@
             position: relative;
         }
         .reveal {
-            transform-origin: top left;
+            transform-origin: top center;
             transition: transform 0.3s ease;
         }
 
@@ -188,20 +189,68 @@
             bottom: 20px !important;
             right: 20px !important;
         }
+
+        /* ──────────────────────────────────────────────────────────
+           🚨 核心保證：強制鎖定字級與顏色（防止 Reveal 主題覆蓋）
+           ────────────────────────────────────────────────────────── */
+        /* 5,6,7,8 頁的內文與第 4 頁完全等大：鎖定為 text-sm (14px) / md:text-base (16px) 效果 */
+        .reveal .card-body-text {
+            font-size: 1rem !important; /* 16px */
+            line-height: 1.75 !important;
+            color: #475569 !important;
+        }
+        @media (max-width: 768px) {
+            .reveal .card-body-text {
+                font-size: 0.875rem !important; /* 14px */
+            }
+        }
+        
+        .reveal .text-xs, .reveal .text-xs * {
+            font-size: 0.75rem !important; /* 12px */
+        }
+        .reveal .text-sm, .reveal .text-sm * {
+            font-size: 0.875rem !important; /* 14px */
+        }
+        .reveal .text-base, .reveal .text-base * {
+            font-size: 1rem !important; /* 16px */
+        }
+        .reveal .text-mumu-navy, .reveal .text-mumu-navy * {
+            color: #1E293B !important;
+        }
+        .reveal .text-slate-600, .reveal .text-slate-600 * {
+            color: #475569 !important;
+        }
+
+        /* ──────────────────────────────────────────────────────────
+           🌟 偽全螢幕鎖定樣式 (iOS Safari 專用殺手鐧)
+           ────────────────────────────────────────────────────────── */
+        .pseudo-fs {
+            position: fixed !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            z-index: 99999 !important;
+            border-radius: 0 !important;
+            border: none !important;
+            margin: 0 !important;
+            background-color: #1e293b !important; /* bg-slate-800 */
+        }
     </style>
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col selection:bg-amber-500/30 selection:text-slate-900">
 
     <!-- Top Premium Navigation Bar with Official High-Res Logo Directly Rendered -->
     <header class="bg-white shadow-md sticky top-0 z-50 px-4 md:px-8 py-3 flex flex-col lg:flex-row justify-between items-center gap-4 border-b border-slate-100">
-        <!-- Logo Area with official high-resolution image directly referenced -->
+        <!-- Logo Area with official high-resolution image directly referenced (Removed Version Diagnostic Tag) -->
         <div class="flex items-center gap-3">
             <img src="muve-logo-07.png" alt="目目非營利" class="h-10 md:h-12 w-auto object-contain">
             <div class="h-8 w-[1px] bg-slate-200 hidden sm:block"></div>
             <span class="text-xs font-bold text-slate-400 hidden sm:inline-block">眼動師資福利新制</span>
         </div>
         
-        <!-- Interactive Tabs for Presentation and Toolkit (Removed policy tab to optimize view logic) -->
+        <!-- Interactive Tabs for Presentation and Toolkit -->
         <nav class="flex items-center gap-1 bg-slate-100 p-1 rounded-2xl w-full lg:w-auto overflow-x-auto">
             <button onclick="switchTab('presentation')" id="btn-presentation" class="tab-btn active px-4 md:px-5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-mumu-blue transition flex items-center gap-2 whitespace-nowrap">
                 <i class="fa-solid fa-person-chalkboard"></i> <span>簡報模式</span>
@@ -220,48 +269,57 @@
         <!-- TAB 1: PRESENTATION VIEW -->
         <div id="view-presentation-container" class="w-full flex flex-col items-center">
             
-            <!-- Mobile Portrait Optimization Tip Banner (Only visible on mobile portrait viewports) -->
+            <!-- Mobile Portrait Optimization Tip Banner -->
             <div class="block md:hidden w-full bg-teal-50 border border-teal-150 text-mumu-blue text-xs font-bold px-4 py-3 rounded-2xl mb-4 flex items-center gap-2 shadow-sm">
                 <i class="fa-solid fa-mobile-screen-button rotate-90 animate-pulse text-base"></i>
-                <span>建議橫過手機，或點擊簡報右上方 <i class="fa-solid fa-expand"></i> 全螢幕，字體更大更好閱讀！</span>
+                <span>建議橫過手機，或點擊上方「切換全螢幕」，解鎖更大、更好閱讀的簡報視覺！</span>
             </div>
 
-            <div id="view-presentation" class="w-full bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative border border-slate-700">
-                
-                <!-- Quick Slide Navigation Bar Overlay -->
-                <div class="absolute top-4 left-4 z-40 bg-white/95 backdrop-blur-md px-3 py-2 rounded-full shadow-lg text-[10px] sm:text-xs flex items-center gap-1 sm:gap-2 border border-slate-200 max-w-[75%] sm:max-w-[85%] overflow-hidden">
-                    <span class="font-bold text-mumu-blue hidden sm:inline-flex items-center gap-1"><i class="fa-solid fa-list"></i> 簡報大綱：</span>
-                    <select id="slide-jump" onchange="jumpToSlide(this.value)" class="bg-transparent border-none text-slate-700 font-extrabold focus:ring-0 cursor-pointer text-[10px] sm:text-xs focus:outline-none max-w-full">
+            <!-- Elegant Slide Controller Bar (Placed externally to completely eliminate overlapping and occlusion on mobile) -->
+            <div class="w-full bg-white px-4 py-3 rounded-2xl shadow-md border border-slate-200 mb-4 flex flex-wrap justify-between items-center gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-mumu-blue flex items-center gap-1"><i class="fa-solid fa-list"></i> 簡報大綱：</span>
+                    <select id="slide-jump" onchange="jumpToSlide(this.value)" class="bg-slate-50 border border-slate-200 text-slate-700 font-extrabold rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-mumu-blue cursor-pointer">
                         <option value="0">1. 新制說明會封面</option>
                         <option value="1">2. 核心設計原則</option>
                         <option value="2">3. 職等與薪資結構</option>
                         <option value="3">4. 年度資格維持條件</option>
-                        <option value="4">5. 晉升與降級回升</option>
+                        <option value="4">5. 晉升與降級回升機制</option>
                         <option value="5">6. 行政與預審機制</option>
                         <option value="6">7. 離職回歸復權辦法</option>
                         <option value="7">8. 誠信合約與三大紅線</option>
                         <option value="8">9. 啟動願景與結語</option>
                     </select>
                 </div>
+                
+                <button onclick="toggleFullscreen()" class="bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-mumu-blue font-bold shadow-sm text-xs py-1.5 px-3 rounded-lg border border-slate-200 transition flex items-center gap-1.5" title="切換全螢幕">
+                    <i class="fa-solid fa-expand"></i> <span>切換全螢幕</span>
+                </button>
+            </div>
 
-                <!-- Fullscreen Toggle Button -->
-                <button onclick="toggleFullscreen()" class="absolute top-4 right-4 z-40 bg-white/95 backdrop-blur-md hover:bg-white p-2 sm:p-2.5 rounded-full shadow-lg text-slate-600 hover:text-mumu-blue transition border border-slate-200" title="切換全螢幕">
-                    <i class="fa-solid fa-expand text-xs sm:text-sm"></i>
+            <!-- Presentation Display Body -->
+            <div id="view-presentation" class="w-full aspect-[1050/650] bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative border border-slate-700">
+                
+                <!-- Fullscreen Close Button (Only visible during pseudo-fullscreen / iOS fullscreen mode to allow exiting safely) -->
+                <button onclick="toggleFullscreen()" id="fs-close-btn" class="hidden absolute top-4 right-4 z-50 bg-white/95 backdrop-blur-md p-2.5 rounded-full shadow-lg text-slate-600 hover:text-mumu-blue transition border border-slate-200" title="關閉全螢幕">
+                    <i class="fa-solid fa-compress"></i>
                 </button>
 
                 <!-- Reveal.js Container -->
-                <div class="reveal h-full w-full">
+                <div class="reveal h-full w-full absolute inset-0">
                     <div class="slides">
 
-                        <!-- Slide 1: Cover -->
-                        <section class="text-center flex flex-col justify-center items-center" style="border-top: 10px solid #00A196;" data-background-gradient="linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)">
-                            <div class="mb-6 text-6xl text-mumu-blue animate-bounce">
+                        <!-- Slide 1: Cover (Fitted with exact golden sizing locks) -->
+                        <section class="text-center flex flex-col justify-center items-center" style="border-top: 10px solid #00A196; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;">
+                            <div class="mb-4 text-5xl text-mumu-blue animate-bounce">
                                 <i class="fa-solid fa-graduation-cap"></i>
                             </div>
-                            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-wide text-mumu-blue mb-4 px-4">
+                            <!-- Main title Locked to 48px !important for elegant header spacing -->
+                            <h1 class="font-black tracking-wide text-mumu-blue mb-4 px-4" style="font-size: 48px !important; line-height: 1.2 !important;">
                                 CEI 認證眼動師資
                             </h1>
-                            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-600 mb-8 whitespace-nowrap">
+                            <!-- Subtitle Locked to 32px !important and completely forbidden from breaking into two lines -->
+                            <h2 class="font-bold text-slate-600 mb-8 whitespace-nowrap" style="font-size: 32px !important; letter-spacing: -0.5px !important;">
                                 全新薪資、晉升與考核制度說明會
                             </h2>
                             <div class="h-1.5 w-24 bg-mumu-orange mb-8 rounded-full"></div>
@@ -275,9 +333,9 @@
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="info-card flex items-start gap-4">
-                                    <div class="text-4xl text-mumu-blue mt-1"><i class="fa-solid fa-award"></i></div>
+                                    <div class="text-4xl text-mumu-blue mt-1 flex-shrink-0"><i class="fa-solid fa-award"></i></div>
                                     <div>
-                                        <h4 class="text-lg font-bold mb-2 text-mumu-blue">專業身份：終身認證資格</h4>
+                                        <h4 class="font-bold mb-2 text-mumu-blue" style="font-size: 20px !important; line-height: 1.3 !important;">專業身份：終身認證資格</h4>
                                         <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
                                             只要通過實作考核並獲得 CEI 證書，您的<strong>「專業身分」將終身有效</strong>。
                                             即使因個人規劃暫停接案，您的<strong>生涯總堂數</strong>將永久保留。
@@ -285,9 +343,9 @@
                                     </div>
                                 </div>
                                 <div class="info-card flex items-start gap-4">
-                                    <div class="text-4xl text-mumu-orange mt-1"><i class="fa-solid fa-calendar-check"></i></div>
+                                    <div class="text-4xl text-mumu-orange mt-1 flex-shrink-0"><i class="fa-solid fa-calendar-check"></i></div>
                                     <div>
-                                        <h4 class="text-lg font-bold mb-2 text-mumu-blue">當期報酬：年度動態審查</h4>
+                                        <h4 class="font-bold mb-2 text-mumu-blue" style="font-size: 20px !important; line-height: 1.3 !important;">當期報酬：年度動態審查</h4>
                                         <p class="text-sm md:text-base leading-relaxed text-slate-600 font-medium">
                                             為了落實品質與對價，<strong>「獎勵金級距」採取年度制（每年 1/1 重新起算）</strong>。
                                             維持穩定產能（年度 120 堂）並配合行政紀律的老師，<strong>即可</strong>享有高階獎勵加成。
@@ -296,7 +354,7 @@
                                 </div>
                             </div>
                             <div class="mt-6 p-4 bg-teal-50/50 border-l-4 border-l-mumu-blue rounded-xl text-xs md:text-sm text-mumu-navy flex items-center gap-3">
-                                <i class="fa-solid fa-circle-info text-lg text-mumu-blue"></i>
+                                <i class="fa-solid fa-circle-info text-lg text-mumu-blue flex-shrink-0"></i>
                                 <span><strong>經營宗旨：</strong>我們不鼓勵暴增課量或犧牲生活，而是透過「120 堂基本年約」建立穩健的眼動教育生態。</span>
                             </div>
                         </section>
@@ -351,12 +409,12 @@
                                 </table>
                             </div>
                             <div class="mt-4 text-xs md:text-sm text-slate-400 italic flex items-center gap-1.5 font-medium">
-                                <i class="fa-solid fa-circle-question text-mumu-blue"></i>
+                                <i class="fa-solid fa-circle-question text-mumu-blue flex-shrink-0"></i>
                                 <span>* 註：每年度 12/31 結算時若累積尾數未滿 10 堂，剩餘堂數一律依比例全額發清，隔年 1/1 累積堂數自動歸零。可以使用上方「獎助金試算」功能進行試算！</span>
                             </div>
                         </section>
 
-                        <!-- Slide 4: Annual Goals -->
+                        <!-- Slide 4: Annual Goals (Adjusted to 5 times) -->
                         <section>
                             <div class="slide-title"><i class="fa-solid fa-list-check mr-3"></i>年度常態任務：資格維持條件</div>
                             <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">每年年底結算，未達標者隔年強制調降一級（鎖定一年）</p>
@@ -370,7 +428,8 @@
                                         <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
                                             <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
                                             <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
-                                            <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
+                                            <!-- Adjusted to 5 times -->
+                                            <li><i class="fa-solid fa-circle-check text-mumu-blue mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 5 次</strong></li>
                                         </ul>
                                     </div>
                                     <div class="text-xs md:text-sm text-mumu-blue font-bold bg-teal-50/50 p-2.5 rounded-lg border border-teal-200 mt-4">
@@ -386,30 +445,35 @@
                                         <ul class="space-y-3.5 text-sm md:text-base text-slate-600 font-medium">
                                             <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>臨床產能</strong>：當年度完成 3 位學生且實際完課滿 <strong>120 堂</strong></li>
                                             <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>持續進修</strong>：完成年度必修研習時數</li>
-                                            <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 3 次</strong></li>
+                                            <!-- Adjusted to 5 times -->
+                                            <li><i class="fa-solid fa-circle-check text-mumu-orange mr-2.5"></i><strong>行政誠信</strong>：影片/日誌遲交兩週全年<strong>未達 5 次</strong></li>
                                         </ul>
                                     </div>
                                     <div class="text-xs md:text-sm text-mumu-navy font-bold bg-amber-50/50 p-2.5 rounded-lg border border-amber-200 mt-4 leading-relaxed">
-                                        <i class="fa-solid fa-file-invoice mr-1 text-mumu-orange"></i> <strong>專業品質指標（報告二選一）：</strong><br>
+                                        <i class="fa-solid fa-file-invoice mr-1 text-mumu-orange flex-shrink-0"></i> <strong>專業品質指標（報告二選一）：</strong><br>
                                         當年度需提交並通過 1 份個案報告（PECS實作 / 研習融入報告）。
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        <!-- Slide 5: Promotion & Recovery (Aligned text sizes and fonts perfectly - image_93c9c2.png) -->
-                        <section class="!py-6">
-                            <div class="slide-title !mb-3"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>常態晉升與降級回升機制</div>
-                            <p class="text-slate-600 mb-3 -mt-2 text-sm font-medium">每年 12 月大盤點，次年 1 月 1 日正式生效（晉升/回升一律對齊同標準）</p>
+                        <!-- Slide 5: Promotion & Recovery (Icons strictly vertical/horizontal centered aligned & inner headers locked to 20px) -->
+                        <section style="padding: 15px 45px !important;">
+                            <div class="slide-title !mb-2"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>常態晉升與降級回升機制</div>
+                            <p class="text-slate-600 mb-2 -mt-2.5 text-sm font-medium">每年 12 月大盤點，次年 1 月 1 日正式生效（晉升/回升一律對齊同標準）</p>
                             
-                            <div class="space-y-2">
-                                <!-- Card 1 -->
-                                <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
+                            <div class="space-y-1.5">
+                                <!-- Card 1: T1 -> C1 -->
+                                <div class="info-card !py-2 !px-4 shadow-sm flex items-center justify-between">
                                     <div class="flex items-center gap-4 flex-grow">
-                                        <div class="text-2xl text-mumu-blue flex-shrink-0"><i class="fa-solid fa-seedling animate-pulse"></i></div>
+                                        <!-- Header completely encapsulating the seedling icon horizontally aligned -->
                                         <div class="flex-grow flex flex-col">
-                                            <h4 class="font-bold text-mumu-blue text-sm">T1 儲備 ➔ 晉升 CEI-Ⅰ</h4>
-                                            <p class="flex flex-wrap gap-x-2 gap-y-1 mt-1 text-slate-600 font-medium" style="font-size: 14px !important;">
+                                            <h4 class="font-bold text-mumu-blue flex items-center gap-2" style="font-size: 20px !important; line-height: 1.3 !important;">
+                                                <i class="fa-solid fa-seedling text-mumu-blue animate-pulse"></i>
+                                                <span>T1 儲備 ➔ 晉升 CEI-Ⅰ</span>
+                                            </h4>
+                                            <!-- Sub-paragraphs strictly locked to card-body-text size (matching slide 4) -->
+                                            <p class="card-body-text flex flex-wrap gap-x-2 gap-y-1 mt-1 font-semibold">
                                                 <span>1. 生涯總累積滿 60 堂</span>
                                                 <span class="text-slate-300">|</span>
                                                 <span>2. PECS 1~3階報告 1 份</span>
@@ -427,13 +491,17 @@
                                     </div>
                                 </div>
 
-                                <!-- Card 2 -->
-                                <div class="info-card !py-2.5 !px-4 shadow-sm flex items-center justify-between">
+                                <!-- Card 2: C1 -> C2 -->
+                                <div class="info-card !py-2 !px-4 shadow-sm flex items-center justify-between">
                                     <div class="flex items-center gap-4 flex-grow">
-                                        <div class="text-2xl text-mumu-orange flex-shrink-0"><i class="fa-solid fa-crown"></i></div>
+                                        <!-- Header completely encapsulating the crown icon horizontally aligned -->
                                         <div class="flex-grow flex flex-col">
-                                            <h4 class="font-bold text-mumu-navy text-sm">CEI-Ⅰ ➔ 晉升 CEI-Ⅱ</h4>
-                                            <p class="flex flex-wrap gap-x-2 gap-y-1 mt-1 text-slate-600 font-medium" style="font-size: 14px !important;">
+                                            <h4 class="font-bold text-mumu-navy flex items-center gap-2" style="font-size: 20px !important; line-height: 1.3 !important;">
+                                                <i class="fa-solid fa-crown text-mumu-orange"></i>
+                                                <span>CEI-Ⅰ ➔ 晉升 CEI-Ⅱ</span>
+                                            </h4>
+                                            <!-- Sub-paragraphs strictly locked to card-body-text size (matching slide 4) -->
+                                            <p class="card-body-text flex flex-wrap gap-x-2 gap-y-1 mt-1 font-semibold">
                                                 <span>1. 生涯總累積滿 240 堂</span>
                                                 <span class="text-slate-300">|</span>
                                                 <span>2. PECS 1~3階報告 1 份</span>
@@ -451,19 +519,20 @@
                                     </div>
                                 </div>
 
-                                <!-- Card 3: Downgrade Recovery (Inline styled to strictly force 14px - image_93c9c2.png) -->
-                                <div class="info-card bg-amber-50/20 border-amber-200 !py-2.5 !px-4 shadow-sm">
-                                    <h4 class="font-bold text-mumu-navy flex items-center gap-2 mb-1 text-sm">
-                                        <i class="fa-solid fa-arrows-spin text-mumu-blue"></i> 降級後回升原職級規定
+                                <!-- Card 3: Downgrade Recovery -->
+                                <div class="info-card bg-amber-50/20 border-amber-200 !py-2 !px-4 shadow-sm">
+                                    <h4 class="font-bold text-mumu-navy flex items-center gap-2 mb-1" style="font-size: 20px !important; line-height: 1.3 !important;">
+                                        <i class="fa-solid fa-arrows-spin text-mumu-blue"></i> <span>降級後回升原職級規定</span>
                                     </h4>
-                                    <p class="text-slate-600 leading-relaxed font-medium" style="font-size: 14px !important;">
+                                    <!-- Locked to card-body-text size (matching slide 4) -->
+                                    <p class="card-body-text leading-relaxed font-semibold">
                                         因降級者之「生涯總累積堂數」已跨越門檻，<strong>無需重新累積總堂數</strong>。被降級的這一年，<strong>老師須達成當年度常態任務，並於盤點期前完成目標職級晉升所需之所有個案報告與培訓任務</strong>，即可於次年 1 月 1 日正式回升。
                                     </p>
                                 </div>
                             </div>
                         </section>
 
-                        <!-- Slide 6: December Audit -->
+                        <!-- Slide 6: December Audit (Paragraph body sizes standardizing to match slide 4) -->
                         <section>
                             <div class="slide-title"><i class="fa-solid fa-calendar-days mr-3"></i>行政對帳與「12/19 預審機制」</div>
                             <p class="text-slate-600 mb-5 -mt-3 text-base font-medium">配合每月 19 號切帳與次月 5 號發薪之常態流程，實施預審與結算制度</p>
@@ -471,10 +540,11 @@
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="info-card border-l-4 border-l-mumu-blue flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-bold text-mumu-blue mb-2 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-calculator"></i> 12 月 19 日：年底大盤點與預審
+                                        <h4 class="font-bold text-mumu-blue mb-2 flex items-center gap-1.5" style="font-size: 20px !important; line-height: 1.3 !important;">
+                                            <i class="fa-solid fa-calculator"></i> <span>12 月 19 日：年底大盤點與預審</span>
                                         </h4>
-                                        <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
+                                        <!-- Locked to card-body-text size (matching slide 4) -->
+                                        <ul class="space-y-2 card-body-text font-semibold">
                                             <li><strong>預審公式：</strong> <code>1/1 ~ 12/19 實際堂數</code> + <code>12/20 ~ 12/31 系統排課數</code></li>
                                             <li><strong>提前判定：</strong> 兩者相加滿 120 堂即判定達標，保留明年原職等與續約資格。</li>
                                         </ul>
@@ -486,10 +556,11 @@
 
                                 <div class="info-card border-l-4 border-l-emerald-600 flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-repeat"></i> 1 月 19 日：跨年堂數與獎金拆分
+                                        <h4 class="font-bold text-emerald-700 mb-2 flex items-center gap-1.5" style="font-size: 20px !important; line-height: 1.3 !important;">
+                                            <i class="fa-solid fa-repeat"></i> <span>1 月 19 日：跨年堂數與獎金拆分</span>
                                         </h4>
-                                        <ul class="space-y-2 text-xs md:text-sm text-slate-600 font-medium">
+                                        <!-- Locked to card-body-text size (matching slide 4) -->
+                                        <ul class="space-y-2 card-body-text font-semibold">
                                             <li><strong>舊年度尾數全變現：</strong> <code>12/20 ~ 12/31</code> 的堂數計入舊年度。在 1/19 結算時，不論累積餘數是否滿 10 堂，一律依舊年度最終費率等比例變現發清，舊累計堂數正式歸零。</li>
                                             <li><strong>新年度全新起跑：</strong> <code>1/1 ~ 1/19</code> 上的課，則直接歸入新年度，重新起算每 10 堂的結算旅程。</li>
                                         </ul>
@@ -498,56 +569,62 @@
                             </div>
                         </section>
 
-                        <!-- Slide 7: Rehire Policy (Left titles: Larger, Color unified; Right body: Smaller, font sizes unified - image_93c65e.png) -->
+                        <!-- Slide 7: Rehire Policy (Title 2 strictly whitespace-nowrap and re-hire clause corrected) -->
                         <section>
                             <div class="slide-title"><i class="fa-solid fa-rotate mr-3"></i>離職回歸與復權管理辦法</div>
                             
                             <div class="space-y-2.5">
                                 <!-- Item 1 -->
                                 <div class="p-3 bg-slate-50 hover:bg-slate-100 transition border border-slate-200 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-                                    <div class="flex items-center gap-2 flex-shrink-0 w-full md:w-52" style="font-size: 15px !important; color: #1E293B !important; font-weight: 900 !important;">
+                                    <!-- Title locked to 16px, navy blue bold -->
+                                    <div class="flex items-center gap-2 flex-shrink-0 w-64" style="font-size: 16px !important; color: #1E293B !important; font-weight: 900 !important;">
                                         <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
                                         <span>1. 中斷服務【半年內】</span>
                                     </div>
-                                    <p class="w-full md:w-3/4 leading-relaxed font-medium" style="font-size: 12px !important; color: #475569 !important;">
+                                    <!-- Locked to card-body-text size (matching slide 4) -->
+                                    <p class="w-full md:w-3/4 leading-relaxed font-semibold card-body-text">
                                         <strong>直接回歸原職級</strong>。年底考核目標採純比例減免：<strong>當年度剩餘月份 × 10 堂</strong>。<br>
                                         達標者隔年維持原職級，未達標者隔年強制降一級。
                                     </p>
                                 </div>
                                 
-                                <!-- Item 2 -->
+                                <!-- Item 2: Strict whitespace-nowrap with no wrap breaking, re-hire clause updated -->
                                 <div class="p-3 bg-teal-50/50 hover:bg-teal-50 transition border border-teal-100 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-                                    <div class="flex items-center gap-2 flex-shrink-0 w-full md:w-52" style="font-size: 15px !important; color: #1E293B !important; font-weight: 900 !important;">
+                                    <!-- Title locked to 16px, navy blue bold with absolute horizontal wrapper -->
+                                    <div class="flex items-center gap-2 flex-shrink-0 w-64 whitespace-nowrap" style="font-size: 16px !important; color: #1E293B !important; font-weight: 900 !important;">
                                         <span class="w-2.5 h-2.5 rounded-full bg-mumu-blueLight"></span>
                                         <span>2. 離職【半年至一年內】</span>
                                     </div>
-                                    <p class="w-full md:w-3/4 leading-relaxed font-medium" style="font-size: 12px !important; color: #475569 !important;">
+                                    <!-- Locked to card-body-text size (matching slide 4) and updated rehire evaluation words -->
+                                    <p class="w-full md:w-3/4 leading-relaxed font-semibold card-body-text">
                                         <strong>強制降一級落腳發薪</strong>。年底考核目標同樣採 <strong>剩餘月份 × 10 堂</strong> 計算。<br>
-                                        只要年底提交高階個案報告並通過審查，隔年 1/1 正式復權、重返原職級！
+                                        比照「原職級」考核制度完成年度任務繳交報告及研習時數，隔年 1/1 正式復權、重返原職級！
                                     </p>
                                 </div>
                                 
                                 <!-- Item 3 -->
                                 <div class="p-3 bg-amber-50/50 hover:bg-amber-50 transition border border-amber-100 rounded-xl flex flex-col md:flex-row items-start justify-between gap-3">
-                                    <div class="flex items-center gap-2 flex-shrink-0 w-full md:w-52 mt-1" style="font-size: 15px !important; color: #1E293B !important; font-weight: 900 !important;">
+                                    <!-- Title locked to 16px, navy blue bold -->
+                                    <div class="flex items-center gap-2 flex-shrink-0 w-64 mt-1" style="font-size: 16px !important; color: #1E293B !important; font-weight: 900 !important;">
                                         <span class="w-2.5 h-2.5 rounded-full bg-mumu-orange animate-pulse"></span>
                                         <span>3. 離職【一年以上】</span>
                                     </div>
-                                    <div class="w-full md:w-3/4 leading-relaxed font-medium space-y-1" style="font-size: 12px !important; color: #475569 !important;">
+                                    <!-- Locked to card-body-text size (matching slide 4) -->
+                                    <div class="w-full md:w-3/4 leading-relaxed font-semibold space-y-1 card-body-text">
                                         <div>• <strong>回歸當下職級</strong>：回歸初次派案一律由 <strong>T1 (儲備師資)</strong> 起跑，領取基礎課酬。</div>
                                         <div>• <strong>歸隊必備條件</strong>：需補齊中斷期間之最新必修核心課程，並通過督導前期檢核即可重新排課。</div>
                                         <div class="pt-1">• <strong>年底考核目標</strong>：</div>
-                                        <ul class="list-disc pl-8 space-y-0.5" style="font-size: 12px !important; color: #475569 !important;">
-                                            <li style="font-size: 12px !important;">生涯總堂數滿 <strong>240 堂</strong>以上 ➔ 可申請晉升 <strong>C2</strong> 並繳交相關晉升申請資料。</li>
-                                            <li style="font-size: 12px !important;">生涯總堂數滿 <strong>60 堂</strong>以上 ➔ 可申請晉升 <strong>C1</strong> 並繳交相關晉升申請資料。</li>
-                                            <li style="font-size: 12px !important;">生涯總堂數未滿 60 堂、個案數未符合 ➔ 留任 <strong>T1</strong> 級別。</li>
+                                        <ul class="list-disc pl-8 space-y-0.5">
+                                            <li>生涯總堂數滿 <strong>240 堂</strong>以上 ➔ 可申請晉升 <strong>C2</strong> 並繳交相關晉升申請資料。</li>
+                                            <li>生涯總堂數滿 <strong>60 堂</strong>以上 ➔ 可申請晉升 <strong>C1</strong> 並繳交相關晉升申請資料。</li>
+                                            <li>生涯總堂數未滿 60 堂、個案數未符合 ➔ 留任 <strong>T1</strong> 級別。</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        <!-- Slide 8: Compliance & Red Lines -->
+                        <!-- Slide 8: Compliance & Red Lines (Updated to 5 times) -->
                         <section>
                             <div class="slide-title"><i class="fa-solid fa-shield-halved mr-3"></i>誠信合約與三大防禦紅線</div>
                             <p class="text-slate-600 mb-6 -mt-3 text-base font-medium">行政延誤採「暫停發放」而非扣款；惡意違約設有懲罰與違約金</p>
@@ -555,27 +632,29 @@
                             <div class="grid grid-cols-2 gap-6">
                                 <div class="info-card border-t-4 border-t-mumu-blue flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-bold text-mumu-blue mb-3 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-envelope-open-text"></i> 1. 行政配合違失
+                                        <h4 class="font-bold text-mumu-blue mb-3 flex items-center gap-1.5" style="font-size: 20px !important; line-height: 1.3 !important;">
+                                            <i class="fa-solid fa-envelope-open-text"></i> <span>1. 行政配合違失</span>
                                         </h4>
-                                        <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
+                                        <!-- Locked to card-body-text size (matching slide 4) with 5-time limits -->
+                                        <p class="leading-relaxed font-semibold card-body-text space-y-2">
                                             每次上課需於 1 週內完成日誌與影片繳交。若無故遲交達 2 星期以上：<br>
                                             • <strong>即時處置 (暫停撥款)</strong>：直接暫停發放該期課酬，補齊後的下個月一併恢復補發。<br>
-                                            • <strong>年度處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 3 次或以上</strong>，年底大審強制降級，鎖定一年。
+                                            • <strong>年度處處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 5 次或以上</strong>，年底大審強制降級，鎖定一年。
                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="info-card border-t-4 border-t-red-600 bg-red-50/50 flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-bold text-red-900 mb-3 flex items-center gap-1.5">
-                                            <i class="fa-solid fa-triangle-exclamation"></i> 2. 嚴重違約行為 (損害商譽與利益衝突)
+                                        <h4 class="font-bold text-red-900 mb-3 flex items-center gap-1.5" style="font-size: 20px !important; line-height: 1.3 !important;">
+                                            <i class="fa-solid fa-triangle-exclamation"></i> <span>2. 嚴重違約行為 (損害商譽與利益衝突)</span>
                                         </h4>
-                                        <p class="text-xs md:text-sm leading-relaxed text-slate-600 font-medium space-y-2">
+                                        <!-- Locked to card-body-text size (matching slide 4) -->
+                                        <p class="leading-relaxed font-semibold card-body-text space-y-2">
                                             出現下列情事，協會得立即解約並追究損害賠償與 15% 懲罰性違約金：<br>
                                             • <strong>私下授課限制</strong>：私自與媒合個案簽訂私契、私下教授眼動課、私用目目軟硬體設備進行私人教學。<br>
                                             • <strong>無故丟包個案</strong>：無故丟包個案、中途失聯，損害學員權益。<br>
-                                            • <strong>專業醫療例外</strong>：非眼動課時間的常態物理/職能/語言復健服務完全合規，<strong>打擊嚴重違約</strong>嚴禁在私人服務中使用目目財產。
+                                            • <strong>專業醫療例外</strong>：非眼動課時間的常態物理/職能/語言復健服務完全合規，<strong>但</strong>嚴禁在私人服務中使用目目財產。
                                         </p>
                                     </div>
                                 </div>
@@ -583,11 +662,12 @@
                         </section>
 
                         <!-- Slide 9: Closing -->
-                        <section class="text-center flex flex-col justify-center items-center" data-background-color="#00A196" style="border-top: none;">
-                            <div class="text-mumu-orange text-2xl md:text-3xl mb-6 font-black tracking-wider">
+                        <section class="text-center flex flex-col justify-center items-center" style="border-top: none; background-color: #00A196 !important;">
+                            <div class="text-2xl md:text-3xl mb-6 font-black tracking-wider" style="color: #FFC53D !important;">
                                 「資格認證是終身的，執業等級是動態的。」
                             </div>
-                            <p class="text-teal-50 text-sm md:text-base mb-10 max-w-2xl leading-relaxed font-semibold">
+                            <!-- Standardized text size to matching comfortable reading -->
+                            <p class="text-sm md:text-base mb-10 max-w-2xl leading-relaxed font-semibold" style="color: #e2fbf8 !important;">
                                 目目全新師資體系，致力於在不增加夥伴工作負擔、不強求加班的前提下，<br>
                                 透過清晰透明的晉升階梯與合理回饋，與各位老師一同守護孩子的眼動教育。
                             </p>
@@ -802,6 +882,7 @@
         // Global State variables
         let currentRank = 'cei-1'; // 'cei-1' or 'cei-2'
         let revealDeck = null;
+        let isPseudoFullscreen = false; // Toggled dynamically on iOS Safari fallback
 
         // On window load, initialize modules
         window.onload = function() {
@@ -852,11 +933,41 @@
             adjustPresentationScale();
             window.addEventListener('resize', adjustPresentationScale);
 
+            // Bind native fullscreen change listeners to keep UI state in sync on Desktop/Android esc exits
+            const nativeEvents = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
+            nativeEvents.forEach(evt => {
+                document.addEventListener(evt, () => {
+                    const elem = document.getElementById('view-presentation');
+                    const btnIcon = document.querySelector('button[onclick="toggleFullscreen()"] i');
+                    const isNativeFs = !!(document.fullscreenElement || 
+                                         document.webkitFullscreenElement || 
+                                         document.mozFullScreenElement || 
+                                         document.msFullscreenElement);
+                    
+                    if (isNativeFs) {
+                        if (btnIcon) {
+                            btnIcon.classList.remove('fa-expand');
+                            btnIcon.classList.add('fa-compress');
+                        }
+                    } else {
+                        // Cleanup styles when user exits native fullscreen
+                        elem.classList.remove('pseudo-fs');
+                        isPseudoFullscreen = false;
+                        document.getElementById('fs-close-btn').classList.add('hidden');
+                        if (btnIcon) {
+                            btnIcon.classList.remove('fa-compress');
+                            btnIcon.classList.add('fa-expand');
+                        }
+                    }
+                    adjustPresentationScale();
+                });
+            });
+
             // Initialize salary calculator values
             updateCalculator(120);
         }
 
-        // Responsive scaling wrapper logic for Embedded Reveal.js (Completely refactored to eliminate double-scaling on mobile)
+        // Responsive scaling wrapper logic for Embedded Reveal.js with Fullscreen Aspect Ratio Adapters
         function adjustPresentationScale() {
             const wrapper = document.getElementById('view-presentation');
             const reveal = document.querySelector('.reveal');
@@ -866,17 +977,49 @@
             const revealTargetWidth = 1050; // The defined slide layout width
             const revealTargetHeight = 650; // The defined slide layout height
 
-            // Compute exact scale ratio based on container width
-            const scale = wrapperWidth / revealTargetWidth;
+            // Detect if currently in any fullscreen state (native or iOS pseudo mode)
+            const isFs = isPseudoFullscreen || !!(document.fullscreenElement || 
+                                                   document.webkitFullscreenElement || 
+                                                   document.mozFullScreenElement || 
+                                                   document.msFullscreenElement);
 
-            // Apply scale transform and force exact layout dimensions on .reveal to align properly
-            reveal.style.width = revealTargetWidth + 'px';
-            reveal.style.height = revealTargetHeight + 'px';
-            reveal.style.transform = `scale(${scale})`;
-            reveal.style.transformOrigin = 'top left';
+            if (isFs) {
+                // Centered scaling to lock presentation bounds perfectly inside mobile landscapes or desktops
+                // CRITICAL FIX: Turn off custom outer scale transforms when in fullscreen so Reveal.js scales correctly!
+                reveal.style.transform = 'none'; 
+                reveal.style.transformOrigin = 'center center';
+                
+                reveal.style.position = 'absolute';
+                reveal.style.width = '100%';
+                reveal.style.height = '100%';
+                reveal.style.left = '0';
+                reveal.style.top = '0';
+                reveal.style.marginLeft = '0';
+                reveal.style.marginTop = '0';
+                
+                wrapper.style.height = '100vh';
+            } else {
+                // Clear any lingering absolute positioning overrides from fullscreen exits
+                reveal.style.position = '';
+                reveal.style.left = '';
+                reveal.style.top = '';
+                reveal.style.marginLeft = '';
+                reveal.style.marginTop = '';
+                reveal.style.width = '';
+                reveal.style.height = '';
 
-            // Dynamically compute wrapper container height to fit the scaled canvas perfectly
-            wrapper.style.height = (revealTargetHeight * scale) + 'px';
+                if (wrapperWidth < 1100) {
+                    const scale = (wrapperWidth - 24) / revealTargetWidth;
+                    reveal.style.transform = `scale(${scale})`;
+                    reveal.style.transformOrigin = 'top center';
+                    
+                    const computedHeight = Math.max(revealTargetHeight * scale, 350);
+                    wrapper.style.height = (computedHeight + 48) + 'px';
+                } else {
+                    reveal.style.transform = 'none';
+                    wrapper.style.height = '700px';
+                }
+            }
             
             if (revealDeck && typeof revealDeck.layout === 'function') {
                 revealDeck.layout();
@@ -890,16 +1033,65 @@
             }
         }
 
-        // Toggle full screen container of slides
+        // Dual-track hybrid Native + Pseudo-Fullscreen Controller (Specifically crafted to bypass iOS Safari limitations)
         function toggleFullscreen() {
-            let elem = document.getElementById('view-presentation');
-            if (!document.fullscreenElement) {
-                elem.requestFullscreen().catch(err => {
-                    showCustomModal('全螢幕錯誤', '瀏覽器不支援 or 拒絕全螢幕操作：' + err.message, 'fa-triangle-exclamation', 'text-mumu-orange');
-                });
+            const elem = document.getElementById('view-presentation');
+            
+            const requestMethod = elem.requestFullscreen || 
+                                  elem.webkitRequestFullscreen || 
+                                  elem.mozRequestFullScreen || 
+                                  elem.msRequestFullscreen;
+            
+            const exitMethod = document.exitFullscreen || 
+                               document.webkitExitFullscreen || 
+                               document.mozCancelFullScreen || 
+                               document.msExitFullscreen;
+
+            // Check specifically if the client is on an iPhone / iPad Safari browser (No native HTML Element Fullscreen Support)
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+            if (requestMethod && !isIOS) {
+                // Desktop & Android: Native Fullscreen API path
+                if (!document.fullscreenElement && 
+                    !document.webkitFullscreenElement && 
+                    !document.mozFullScreenElement && 
+                    !document.msFullscreenElement) {
+                    
+                    requestMethod.call(elem).catch(() => {
+                        // Fallback safely to CSS mode if native API request is blocked by browser policies
+                        togglePseudoFullscreen(elem);
+                    });
+                } else {
+                    if (exitMethod) exitMethod.call(document);
+                }
             } else {
-                document.exitFullscreen();
+                // iOS iPhone Safari Fallback path: Forced CSS overlay pseudo-fullscreen
+                togglePseudoFullscreen(elem);
             }
+        }
+
+        // Toggles a persistent fullscreen fallback state using standard CSS classes
+        function togglePseudoFullscreen(elem) {
+            isPseudoFullscreen = !isPseudoFullscreen;
+            const btnIcon = document.querySelector('button[onclick="toggleFullscreen()"] i');
+            const closeBtn = document.getElementById('fs-close-btn');
+            
+            if (isPseudoFullscreen) {
+                elem.classList.add('pseudo-fs');
+                if (closeBtn) closeBtn.classList.remove('hidden');
+                if (btnIcon) {
+                    btnIcon.classList.remove('fa-expand');
+                    btnIcon.classList.add('fa-compress');
+                }
+            } else {
+                elem.classList.remove('pseudo-fs');
+                if (closeBtn) closeBtn.classList.add('hidden');
+                if (btnIcon) {
+                    btnIcon.classList.remove('fa-compress');
+                    btnIcon.classList.add('fa-expand');
+                }
+            }
+            adjustPresentationScale();
         }
 
         // Tab Switcher Controller
@@ -1043,7 +1235,7 @@
             }
         }
 
-        // Safe copy calculation report utility for browser sandbox iframe
+        // Copy Clipboard Helper Method with iframe-safe fallback logic
         function copyCalculatorReport() {
             let sessions = document.getElementById('calc-input-number').value;
             let rankText = currentRank === 'cei-1' ? 'CEI-I 一級師資' : 'CEI-II 二級師資';
