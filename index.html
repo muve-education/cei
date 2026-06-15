@@ -297,8 +297,8 @@
                 </button>
             </div>
 
-            <!-- Presentation Display Body -->
-            <div id="view-presentation" class="w-full aspect-[1050/650] bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative border border-slate-700">
+            <!-- Presentation Display Body (Removed aspect-[1050/650] to eliminate JS scaling height race-conditions) -->
+            <div id="view-presentation" class="w-full bg-slate-800 rounded-3xl overflow-hidden shadow-2xl relative border border-slate-700">
                 
                 <!-- Fullscreen Close Button (Only visible during pseudo-fullscreen / iOS fullscreen mode to allow exiting safely) -->
                 <button onclick="toggleFullscreen()" id="fs-close-btn" class="hidden absolute top-4 right-4 z-50 bg-white/95 backdrop-blur-md p-2.5 rounded-full shadow-lg text-slate-600 hover:text-mumu-blue transition border border-slate-200" title="關閉全螢幕">
@@ -569,13 +569,13 @@
                             </div>
                         </section>
 
-                        <!-- Slide 7: Rehire Policy (Title 2 strictly whitespace-nowrap and re-hire clause corrected) -->
-                        <section>
-                            <div class="slide-title"><i class="fa-solid fa-rotate mr-3"></i>離職回歸與復權管理辦法</div>
+                        <!-- Slide 7: Rehire Policy (Locked spacing, margins, and padding vertically to guarantee 100% full height safe rendering in iOS landscape/portrait - S__8454148_0.jpg) -->
+                        <section style="padding: 15px 45px !important;">
+                            <div class="slide-title !mb-2"><i class="fa-solid fa-rotate mr-3"></i>離職回歸與復權管理辦法</div>
                             
-                            <div class="space-y-2.5">
+                            <div class="space-y-1.5">
                                 <!-- Item 1 -->
-                                <div class="p-3 bg-slate-50 hover:bg-slate-100 transition border border-slate-200 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                                <div class="p-2 bg-slate-50 hover:bg-slate-100 transition border border-slate-200 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
                                     <!-- Title locked to 16px, navy blue bold -->
                                     <div class="flex items-center gap-2 flex-shrink-0 w-64" style="font-size: 16px !important; color: #1E293B !important; font-weight: 900 !important;">
                                         <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span>
@@ -589,7 +589,7 @@
                                 </div>
                                 
                                 <!-- Item 2: Strict whitespace-nowrap with no wrap breaking, re-hire clause updated -->
-                                <div class="p-3 bg-teal-50/50 hover:bg-teal-50 transition border border-teal-100 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                                <div class="p-2 bg-teal-50/50 hover:bg-teal-50 transition border border-teal-100 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
                                     <!-- Title locked to 16px, navy blue bold with absolute horizontal wrapper -->
                                     <div class="flex items-center gap-2 flex-shrink-0 w-64 whitespace-nowrap" style="font-size: 16px !important; color: #1E293B !important; font-weight: 900 !important;">
                                         <span class="w-2.5 h-2.5 rounded-full bg-mumu-blueLight"></span>
@@ -603,18 +603,18 @@
                                 </div>
                                 
                                 <!-- Item 3 -->
-                                <div class="p-3 bg-amber-50/50 hover:bg-amber-50 transition border border-amber-100 rounded-xl flex flex-col md:flex-row items-start justify-between gap-3">
+                                <div class="p-2 bg-amber-50/50 hover:bg-amber-50 transition border border-amber-100 rounded-xl flex flex-col md:flex-row items-start justify-between gap-1.5">
                                     <!-- Title locked to 16px, navy blue bold -->
                                     <div class="flex items-center gap-2 flex-shrink-0 w-64 mt-1" style="font-size: 16px !important; color: #1E293B !important; font-weight: 900 !important;">
                                         <span class="w-2.5 h-2.5 rounded-full bg-mumu-orange animate-pulse"></span>
                                         <span>3. 離職【一年以上】</span>
                                     </div>
                                     <!-- Locked to card-body-text size (matching slide 4) -->
-                                    <div class="w-full md:w-3/4 leading-relaxed font-semibold space-y-1 card-body-text">
+                                    <div class="w-full md:w-3/4 leading-normal font-semibold space-y-0.5 card-body-text">
                                         <div>• <strong>回歸當下職級</strong>：回歸初次派案一律由 <strong>T1 (儲備師資)</strong> 起跑，領取基礎課酬。</div>
                                         <div>• <strong>歸隊必備條件</strong>：需補齊中斷期間之最新必修核心課程，並通過督導前期檢核即可重新排課。</div>
-                                        <div class="pt-1">• <strong>年底考核目標</strong>：</div>
-                                        <ul class="list-disc pl-8 space-y-0.5">
+                                        <div class="pt-0.5">• <strong>年底考核目標</strong>：</div>
+                                        <ul class="list-disc pl-8 space-y-0">
                                             <li>生涯總堂數滿 <strong>240 堂</strong>以上 ➔ 可申請晉升 <strong>C2</strong> 並繳交相關晉升申請資料。</li>
                                             <li>生涯總堂數滿 <strong>60 堂</strong>以上 ➔ 可申請晉升 <strong>C1</strong> 並繳交相關晉升申請資料。</li>
                                             <li>生涯總堂數未滿 60 堂、個案數未符合 ➔ 留任 <strong>T1</strong> 級別。</li>
@@ -639,7 +639,7 @@
                                         <p class="leading-relaxed font-semibold card-body-text space-y-2">
                                             每次上課需於 1 週內完成日誌與影片繳交。若無故遲交達 2 星期以上：<br>
                                             • <strong>即時處置 (暫停撥款)</strong>：直接暫停發放該期課酬，補齊後的下個月一併恢復補發。<br>
-                                            • <strong>年度處處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 5 次或以上</strong>，年底大審強制降級，鎖定一年。
+                                            • <strong>年度處置 (強制降級)</strong>：全年累積被暫停撥款<strong>達 5 次或以上</strong>，年底大審強制降級，鎖定一年。
                                         </p>
                                     </div>
                                 </div>
@@ -967,7 +967,7 @@
             updateCalculator(120);
         }
 
-        // Responsive scaling wrapper logic for Embedded Reveal.js with Fullscreen Aspect Ratio Adapters
+        // Responsive scaling wrapper logic for Embedded Reveal.js with Fullscreen Aspect Ratio Adapters (Perfected scaling and margins)
         function adjustPresentationScale() {
             const wrapper = document.getElementById('view-presentation');
             const reveal = document.querySelector('.reveal');
@@ -986,38 +986,46 @@
             if (isFs) {
                 // Centered scaling to lock presentation bounds perfectly inside mobile landscapes or desktops
                 // CRITICAL FIX: Turn off custom outer scale transforms when in fullscreen so Reveal.js scales correctly!
-                reveal.style.transform = 'none'; 
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                const scaleX = viewportWidth / revealTargetWidth;
+                const scaleY = viewportHeight / revealTargetHeight;
+                const scale = Math.min(scaleX, scaleY);
+
+                reveal.style.transform = `scale(${scale})`;
                 reveal.style.transformOrigin = 'center center';
                 
                 reveal.style.position = 'absolute';
-                reveal.style.width = '100%';
-                reveal.style.height = '100%';
-                reveal.style.left = '0';
-                reveal.style.top = '0';
-                reveal.style.marginLeft = '0';
-                reveal.style.marginTop = '0';
+                reveal.style.width = '1050px';
+                reveal.style.height = '650px';
+                reveal.style.left = '50%';
+                reveal.style.top = '50%';
+                reveal.style.marginLeft = `-${revealTargetWidth / 2}px`;
+                reveal.style.marginTop = `-${revealTargetHeight / 2}px`;
                 
                 wrapper.style.height = '100vh';
             } else {
-                // Clear any lingering absolute positioning overrides from fullscreen exits
-                reveal.style.position = '';
-                reveal.style.left = '';
-                reveal.style.top = '';
+                // Non-fullscreen mobile and desktop scale sync (Avoids tiny box rendering on portrait - S__8454147_0.jpg)
+                reveal.style.position = 'absolute';
+                reveal.style.left = '0';
+                reveal.style.top = '0';
                 reveal.style.marginLeft = '';
                 reveal.style.marginTop = '';
-                reveal.style.width = '';
-                reveal.style.height = '';
 
-                if (wrapperWidth < 1100) {
-                    const scale = (wrapperWidth - 24) / revealTargetWidth;
+                if (wrapperWidth < 1050) {
+                    const scale = wrapperWidth / revealTargetWidth;
                     reveal.style.transform = `scale(${scale})`;
-                    reveal.style.transformOrigin = 'top center';
-                    
-                    const computedHeight = Math.max(revealTargetHeight * scale, 350);
-                    wrapper.style.height = (computedHeight + 48) + 'px';
+                    reveal.style.transformOrigin = 'top left'; // Standardizes alignment with left margins
+                    reveal.style.width = '1050px';
+                    reveal.style.height = '650px';
+                    wrapper.style.height = (revealTargetHeight * scale) + 'px'; // Height strictly equal to scaled height (Zero blank borders!)
                 } else {
                     reveal.style.transform = 'none';
-                    wrapper.style.height = '700px';
+                    reveal.style.transformOrigin = 'center center';
+                    reveal.style.width = '1050px';
+                    reveal.style.height = '650px';
+                    wrapper.style.height = '650px';
                 }
             }
             
