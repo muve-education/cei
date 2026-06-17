@@ -468,7 +468,7 @@
                                         </h4>
                                         <ul class="space-y-2 card-body-text font-semibold text-slate-600 list-none" style="font-size: 13.5px !important; line-height: 1.5 !important; list-style-type: none !important;">
                                             <li style="list-style-type: none !important;">• <strong>個案不可抗力因素</strong>：學生長期住院、突發重大傷病、或單一學生頻繁請假致使課程中斷。</li>
-                                            <li style="list-style-type: none !important;">• <strong>本會案源調度限制</strong>：本會因案源調度限制，未能及時指派新案或補齊該減少之課堂數。</li>
+                                            <li style="list-style-type: none !important;">• <strong>本會案源調度限制</strong>：本會因案源調度限制，未能及時指派新案 or 補齊該減少之課堂數。</li>
                                             <li style="list-style-type: none !important;">• <strong>無歸責老師教學違失</strong>：老師其餘指派之個案正常上課，無任何可歸責於老師之事由。</li>
                                         </ul>
                                     </div>
@@ -486,7 +486,7 @@
                                         <div class="space-y-2.5 card-body-text font-semibold text-slate-600" style="font-size: 13.5px !important; line-height: 1.5 !important;">
                                             <p>• <strong>師資主動通報義務</strong>：老師必須於狀況起<strong>兩週內</strong>，主動向教學部正式通報（敘明姓名、時間與預期影響數）。</p>
                                             <p class="text-red-600 font-bold">• <strong>逾期不予受理</strong>：若事件發生時未主動通報，延遲至年底盤點時始提出上述個案因素作為抗辯者，一律不予受理。</p>
-                                            <p>• <strong>人工彈性審查</strong>：經教學部查證屬實者，年底盤點時維持原職級或申請常態晉升之門檻得予以折算、減免。等比例免除常態完課堂數。</p>
+                                            <p>• <strong>人工彈性審查</strong>：經教學部查證屬實者，年底盤點時維持原職級或申請常態晉升之門檻得依實務狀況折算、減免。</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1018,22 +1018,27 @@
             } else {
                 // Clear any lingering absolute positioning overrides from fullscreen exits
                 reveal.style.position = '';
-                reveal.style.width = '';
-                reveal.style.height = '';
                 reveal.style.left = '';
                 reveal.style.top = '';
                 reveal.style.marginLeft = '';
                 reveal.style.marginTop = '';
 
                 if (wrapperWidth < 1100) {
-                    const scale = (wrapperWidth - 24) / revealTargetWidth;
-                    reveal.style.transform = `scale(${scale})`;
-                    reveal.style.transformOrigin = 'top left'; // Changed to 'top left' to guarantee perfect left-aligned width-fill on mobile
+                    // Force the actual internal width/height of Reveal.js container to prevent double-scaling
+                    reveal.style.width = revealTargetWidth + 'px';
+                    reveal.style.height = revealTargetHeight + 'px';
                     
-                    const computedHeight = Math.max(revealTargetHeight * scale, 350);
-                    wrapper.style.height = (computedHeight + 48) + 'px';
+                    const scale = (wrapperWidth) / revealTargetWidth;
+                    reveal.style.transform = `scale(${scale})`;
+                    reveal.style.transformOrigin = 'top left'; // Pin the scale perfectly to the left
+                    
+                    // Directly assign wrapper height to exactly match the scaled presentation height (removing dark empty space!)
+                    const computedHeight = revealTargetHeight * scale;
+                    wrapper.style.height = computedHeight + 'px';
                 } else {
                     reveal.style.transform = 'none';
+                    reveal.style.width = '100%';
+                    reveal.style.height = '100%';
                     wrapper.style.height = '700px';
                 }
             }
@@ -1249,7 +1254,7 @@
                 icon.innerHTML = "<i class='fa-solid fa-circle-check text-emerald-600'></i>";
                 title.className = "font-bold text-sm text-emerald-900";
                 title.innerText = `已達成年度保級目標！`;
-                desc.innerText = `恭喜！您已順利完成當年度 ${sessions} 堂課，成功維持明年度 ${rankName} 師資資格。多上的每一堂課皆套用階梯式獎勵！`;
+                desc.innerText = `恭喜！您已順利完成當年度 ${sessions} 堂課，成功維持明年度 ${rankName} 師資資格。多上的每一堂課皆完美套用階梯式獎勵！`;
             }
         }
 
