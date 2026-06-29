@@ -94,6 +94,10 @@
             transform: translateY(-2px);
         }
 
+        .info-card h4 {
+            font-size: 1.15rem !important;
+        }
+
         .badge-amber {
             background-color: #fef3c7;
             color: #d97706;
@@ -250,21 +254,22 @@
             <span class="text-xs font-bold text-slate-400 hidden sm:inline-block">眼動師資福利新制</span>
         </div>
         
-        <!-- Interactive Tabs for Presentation and Toolkit -->
+        <!-- Interactive Tabs for Presentation and Toolkit with integrated Document Link -->
         <nav class="flex items-center gap-1 bg-slate-100 p-1 rounded-2xl w-full lg:w-auto overflow-x-auto">
             <button onclick="switchTab('presentation')" id="btn-presentation" class="tab-btn active px-4 md:px-5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-mumu-blue transition flex items-center gap-2 whitespace-nowrap">
                 <i class="fa-solid fa-person-chalkboard"></i> <span>簡報模式</span>
             </button>
+            <button onclick="switchTab('roadmap')" id="btn-roadmap" class="tab-btn px-4 md:px-5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-mumu-blue transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-map-location-dot"></i> <span>師資分級地圖</span>
+            </button>
             <button onclick="switchTab('calculator')" id="btn-calculator" class="tab-btn px-4 md:px-5 py-2.5 text-sm font-semibold rounded-xl text-slate-600 hover:text-mumu-blue transition flex items-center gap-2 whitespace-nowrap">
                 <i class="fa-solid fa-calculator"></i> <span>薪資獎助金試算</span>
             </button>
+            <div class="h-6 w-[1px] bg-slate-300 mx-1.5 hidden sm:block"></div>
+            <a href="https://docs.google.com/document/d/1ut1clqRNBI9BHFXU4OqgeK-CAemNq_4pmRED5QErnes/edit?usp=sharing" target="_blank" class="px-4 md:px-5 py-2.5 text-sm font-bold rounded-xl text-slate-500 hover:text-mumu-blue transition flex items-center gap-2 whitespace-nowrap">
+                <i class="fa-solid fa-scale-balanced text-mumu-blue animate-pulse"></i> <span class="underline decoration-dotted">詳細制度規範條文</span>
+            </a>
         </nav>
-        
-<div class="w-full lg:w-auto flex justify-end">
-    <a href="https://docs.google.com/document/d/1ut1clqRNBI9BHFXU4OqgeK-CAemNq_4pmRED5QErnes/edit?usp=sharing" target="_blank" class="px-4 py-2 text-xs font-bold text-mumu-blue hover:text-white border border-mumu-blue hover:bg-mumu-blue rounded-full transition flex items-center gap-2 whitespace-nowrap shadow-sm">
-        <i class="fa-solid fa-file-pdf"></i> <span>目目眼動師資制度規範</span>
-    </a>
-</div>
     </header>
 
     <!-- Main Content Container -->
@@ -373,8 +378,8 @@
                                         <tr>
                                             <th class="rounded-tl-lg">階段與職等</th>
                                             <th>合約期限</th>
-                                            <th>基本時薪</th>
-                                            <th class="rounded-tr-lg text-left pl-6">年度累積獎助金 (每 10 堂結算，隔年重新起算)</th>
+                                            <th>單堂課酬</th>
+                                            <th class="rounded-tr-lg text-left pl-6">年度累積獎助金 (每 10 堂課結算，隔年重新起算)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -514,8 +519,10 @@
                                             <p class="card-body-text flex flex-wrap gap-x-2 gap-y-1 mt-1 font-semibold">
                                                 <span>1. 生涯總累積滿 60 堂</span>
                                                 <span class="text-slate-300">|</span>
-                                                <span>2. <a href="https://docs.google.com/document/d/1gbHWCxVSHHAQTG8DV4pxFPdmlyqsoWw2ZP_Ngik0ArA/edit?tab=t.0" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">PECS 1~3階報告</a> 1 份</span>
-                                                <span>3. <a href="https://docs.google.com/document/d/1jAvzMjiI-08-Hh0Pv0qUcqOURsx5iAhw-Jf-9PcRT0Q/edit?usp=sharing" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">學生現況分析表</a> 1 份</span>
+                                                <span>2. <a href="https://docs.google.com/document/d/1gbHWCxVSHHAQTG8DV4pxFPdmlyqsoWw2ZP_Ngik0ArA/edit?usp=sharing" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">PECS 1~3階報告</a> 1 份</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>3. <a href="https://docs.google.com/document/d/1jAvzMjiI-08-Hh0Pv0qUcqOURsx5iAhw-Jf-9PcRT0Q/edit?usp=drive_link" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">學生現況分析表</a> 1 份</span>
+                                                <span class="text-slate-300">|</span>
                                                 <span>4. 修畢代幣課程</span>
                                                 <span class="text-slate-300">|</span>
                                                 <span>5. 完成年度必修教育時數</span>
@@ -538,8 +545,10 @@
                                             <p class="card-body-text flex flex-wrap gap-x-2 gap-y-1 mt-1 font-semibold">
                                                 <span>1. 生涯總累積滿 240 堂</span>
                                                 <span class="text-slate-300">|</span>
-                                                <span>2. <a href="https://docs.google.com/document/d/1gbHWCxVSHHAQTG8DV4pxFPdmlyqsoWw2ZP_Ngik0ArA/edit?tab=t.0" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">PECS 1~3階報告</a> 1 份</span>
-                                                <span>3. <a href="https://docs.google.com/document/d/1sUduIaUV9lZuKAny5XumeG_NCAhGpTxmvh9ByR7JkSc/edit?tab=t.0" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">研討融入報告</a> 1 份</span>
+                                                <span>2. <a href="https://docs.google.com/document/d/1gbHWCxVSHHAQTG8DV4pxFPdmlyqsoWw2ZP_Ngik0ArA/edit?usp=sharing" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">PECS 1~3階報告</a> 1 份</span>
+                                                <span class="text-slate-300">|</span>
+                                                <span>3. <a href="https://docs.google.com/document/d/1sUduIaUV9lZuKAny5XumeG_NCAhGpTxmvh9ByR7JkSc/edit?usp=sharing" target="_blank" class="text-mumu-blue hover:text-mumu-blueLight underline decoration-dotted transition-colors">研討融入報告</a> 1 份</span>
+                                                <span class="text-slate-300">|</span>
                                                 <span>4. 修畢 PECS 4 課程</span>
                                                 <span class="text-slate-300">|</span>
                                                 <span>5. 完成年度必修教育時數</span>
@@ -661,7 +670,7 @@
                                         <p class="leading-relaxed font-semibold card-body-text space-y-2">
                                             每次上課需於 1 週內完成報告與影片繳交。教學目標需於第四堂課前繳交。若無故遲交：<br>
                                             • <strong>即時處置 (暫停撥款)</strong>：直接暫停發放該堂課酬，補齊後的下個月一併恢復補發。<br>
-                                            • <strong>年度處置 (強制降級)</strong>：全年上述文件<strong>遲交兩周</strong>累積<strong>達 5 次或以上</strong>，年底大審強制降級，鎖定一年。
+                                            • <strong>年度處置 (強制降級)</strong>：全年上述文件<strong>遲交兩周</strong>累積<strong>達 5 次 or 以上</strong>，年底大審強制降級，鎖定一年。
                                         </p>
                                     </div>
                                 </div>
@@ -675,7 +684,7 @@
                                             出現下列情事，協會得立即解約並追究損害賠償與 15% 懲罰性違約金：<br>
                                             • <strong>私下授課限制</strong>：私下使用目目名義進行收費眼動課程、私用目目軟硬體設備進行私人教學。<br>
                                             • <strong>無故丟包個案</strong>：無故丟包個案、中途失聯，損害學員權益。<br>
-                                            • <strong>專業醫療例外</strong>：非眼動課時間的常態物理/職能/語言復健服務完全合規，<strong>但</strong>嚴禁在私人服務中使用目目財產。
+                                            • <strong>專業醫療例外</strong>：非眼動課時間的常態物理/職能/語言復健服務完全合規，<strong>限</strong>嚴禁在私人服務中使用目目財產。
                                         </p>
                                     </div>
                                 </div>
@@ -701,7 +710,297 @@
             </div>
         </div>
 
-        <!-- TAB 2: SALARY CALCULATOR VIEW -->
+        <!-- TAB 2: DETAILED ROADMAP VIEW (Perfect digital replica of 師資分級 (2).jpg with pixel precision adjustments) -->
+        <div id="view-roadmap-container" class="hidden w-full max-w-5xl flex flex-col items-center">
+            
+            <!-- Map Controller Control Bar -->
+            <div class="w-full bg-white px-4 py-3 rounded-2xl shadow-md border border-slate-200 mb-4 flex justify-between items-center gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-extrabold text-mumu-blue"><i class="fa-solid fa-map-location-dot"></i> 師資晉升全景地圖：</span>
+                    <span id="zoom-percentage" class="text-sm font-black text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">100%</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="zoomRoadmap(0.8)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-xl text-xs font-black transition flex items-center gap-1" title="縮小地圖">
+                        <i class="fa-solid fa-minus"></i> <span>縮小</span>
+                    </button>
+                    <button onclick="zoomRoadmap(1.0)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl text-xs font-black transition" title="重設尺寸">
+                        <span>100% (還原)</span>
+                    </button>
+                    <button onclick="zoomRoadmap(1.2)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 p-2 rounded-xl text-xs font-black transition flex items-center gap-1" title="放大地圖">
+                        <i class="fa-solid fa-plus"></i> <span>放大</span>
+                    </button>
+                    <button onclick="zoomRoadmap(1.5)" class="bg-slate-50 hover:bg-slate-100 text-mumu-blue border border-slate-200 px-3 py-2 rounded-xl text-xs font-extrabold transition" title="1.5倍特大">
+                        <span>1.5x 特大</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Zoomable Canvas Container -->
+            <div id="roadmap-scroll-container" class="w-full bg-slate-200 rounded-3xl overflow-auto shadow-inner border border-slate-300 relative p-4 flex justify-start items-start" style="height: 700px;">
+                <div id="roadmap-force-scroll" class="relative" style="width: 1000px; height: 1450px;">
+                    
+                    <!-- Digital High-Fidelity Flow Map (Absolute Position System for Figma-like Whitespace Control) -->
+                    <div id="roadmap-canvas" class="absolute left-0 top-0 w-[1000px] h-[1450px] bg-slate-50 rounded-2xl shadow-xl border border-slate-200 overflow-hidden" style="transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: top left;">
+                        
+                        <!-- Connecting SVGs & Line Paths (Guarantees infinite crisp arrow quality) -->
+                        <svg class="absolute inset-0 pointer-events-none w-full h-full" style="z-index: 5;">
+                            <defs>
+                                <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#10B981" />
+                                </marker>
+                                <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#0EA5E9" />
+                                </marker>
+                                <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#F59E0B" />
+                                </marker>
+                            </defs>
+                            <!-- T0 ➔ T1 (Aligned strictly with center X=129px) -->
+                            <path d="M 129,151 L 129,195" stroke="#10B981" stroke-width="3" fill="none" marker-end="url(#arrow-green)" />
+                            
+                            <!-- T0 ➔ Core Tasks (Curved alignment, perfect vertical offset center) -->
+                            <path d="M 234,113.5 Q 282,113.5 330,150" stroke="#10B981" stroke-width="2.5" fill="none" marker-end="url(#arrow-green)" />
+                            <!-- T1 ➔ Core Tasks (Curved alignment, perfect vertical offset center) -->
+                            <path d="M 234,238.5 Q 282,238.5 330,162" stroke="#10B981" stroke-width="2.5" fill="none" marker-end="url(#arrow-green)" />
+                            
+                            <!-- Core Tasks ➔ Matchmaking (Perfect horizontal center-aligned) -->
+                            <path d="M 670,156 L 734,156" stroke="#10B981" stroke-width="2.5" fill="none" marker-end="url(#arrow-green)" />
+
+                            <!-- Stage 1 to Stage 2 Large Arrow -->
+                            <path d="M 500,290 L 500,440" stroke="#10B981" stroke-width="5" fill="none" marker-end="url(#arrow-green)" stroke-dasharray="1 1" />
+
+                            <!-- CEI-I ➔ Core Tasks (Perfect horizontal center-aligned) -->
+                            <path d="M 264,540 L 320,540" stroke="#0EA5E9" stroke-width="2.5" fill="none" marker-end="url(#arrow-blue)" />
+                            
+                            <!-- Core Tasks ➔ Matchmaking (Perfect horizontal center-aligned) -->
+                            <path d="M 680,540 L 734,540" stroke="#0EA5E9" stroke-width="2.5" fill="none" marker-end="url(#arrow-blue)" />
+
+                            <!-- CEI-I Card bottom ➔ 單堂課酬 (Dotted curved path) -->
+                            <path d="M 144,585 Q 144,660 320,660" stroke="#0EA5E9" stroke-width="2.5" stroke-dasharray="4" fill="none" marker-end="url(#arrow-blue)" />
+
+                            <!-- Stage 2 to Stage 3 Large Arrow -->
+                            <path d="M 500,850 L 500,990" stroke="#0EA5E9" stroke-width="5" fill="none" marker-end="url(#arrow-blue)" stroke-dasharray="1 1" />
+
+                            <!-- CEI-II ➔ Core Tasks (Perfect horizontal center-aligned) -->
+                            <path d="M 264,1125 L 320,1125" stroke="#F59E0B" stroke-width="2.5" fill="none" marker-end="url(#arrow-amber)" />
+                            
+                            <!-- Core Tasks ➔ Matchmaking (Perfect horizontal center-aligned) -->
+                            <path d="M 680,1125 L 734,1125" stroke="#F59E0B" stroke-width="2.5" fill="none" marker-end="url(#arrow-amber)" />
+
+                            <!-- CEI-II Card bottom ➔ 單堂課酬 (Dotted curved path) -->
+                            <path d="M 144,1175 Q 144,1280 320,1280" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="4" fill="none" marker-end="url(#arrow-amber)" />
+                        </svg>
+
+                        <!-- STAGE 1 AREA (Green Zone) -->
+                        <div class="absolute left-4 top-4 w-[968px] h-[280px] bg-emerald-50/30 border-2 border-emerald-100 rounded-3xl p-4">
+                            <!-- Fixed: Changed to absolute position to avoid normal flow push and overlap -->
+                            <span class="absolute left-6 top-4 text-xs font-black text-emerald-800 tracking-wider bg-emerald-100 px-3 py-1 rounded-lg">STAGE 1</span>
+                            
+                            <!-- T0 Card (Shifted down to top-[60px] to perfectly avoid Stage 1 badge overlap) -->
+                            <div class="absolute left-6 top-[60px] w-[210px] h-[75px] bg-white border-2 border-emerald-500 rounded-2xl p-3 shadow-md flex items-center gap-3" style="z-index: 10;">
+                                <span class="bg-emerald-100 text-emerald-800 font-extrabold text-xs px-2.5 py-1.5 rounded-xl">T0</span>
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-slate-400 font-bold">培訓眼動教師</span>
+                                    <strong class="text-sm text-slate-800">單堂課酬：$1000</strong>
+                                </div>
+                            </div>
+
+                            <!-- T0 ➔ T1 Arrow Label (Vertically Centered exactly in between T0 & T1) -->
+                            <div class="absolute left-6 top-[142px] w-[210px] flex justify-center" style="z-index: 20;">
+                                <span class="bg-white border border-emerald-200 px-2.5 py-0.5 rounded-lg shadow-sm text-[10px] font-bold text-emerald-700 whitespace-nowrap">課堂累積滿 30 小時</span>
+                            </div>
+
+                            <!-- T1 Card (Shifted down to top-[185px] to complete alignment axis) -->
+                            <div class="absolute left-6 top-[185px] w-[210px] h-[75px] bg-white border-2 border-emerald-500 rounded-2xl p-3 shadow-md flex items-center gap-3" style="z-index: 10;">
+                                <span class="bg-emerald-100 text-emerald-800 font-extrabold text-xs px-2.5 py-1.5 rounded-xl">T1</span>
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-slate-400 font-bold">儲備眼動教師</span>
+                                    <strong class="text-sm text-slate-800">單堂課酬：$1200</strong>
+                                </div>
+                            </div>
+
+                            <!-- Core Tasks Box (Strictly Aligned with Center axis at 156px) -->
+                            <div class="absolute left-[330px] top-[90px] w-[340px] h-[100px] bg-white border border-emerald-200 rounded-2xl p-3 shadow-sm flex flex-col justify-center" style="z-index: 10;">
+                                <h5 class="text-xs font-extrabold text-emerald-800 mb-1"><i class="fa-solid fa-list-check"></i> 【核心任務】</h5>
+                                <ul class="text-[11px] text-slate-600 font-semibold space-y-1">
+                                    <li>• 1. 軟硬體熟悉</li>
+                                    <li>• 2. PECS 1~3階段</li>
+                                </ul>
+                            </div>
+
+                            <!-- Matchmaking Area Box (Aligned to Center axis at 156px) -->
+                            <div class="absolute left-[740px] top-[100px] w-[200px] h-[80px] bg-emerald-100/40 border border-emerald-200 rounded-2xl p-3 flex items-center justify-center text-center" style="z-index: 10;">
+                                <span class="text-[11px] font-bold text-emerald-800"><i class="fa-solid fa-people-arrows"></i> 可媒合：L2、L3學生</span>
+                            </div>
+                        </div>
+
+                        <!-- STAGE 1 ➔ STAGE 2 TRANSITION -->
+                        <!-- Left Side Conditions -->
+                        <div class="absolute left-[130px] top-[300px] w-[310px] space-y-1.5" style="z-index: 10;">
+                            <div class="bg-white border border-slate-200 p-2 rounded-xl text-left shadow-sm">
+                                <span class="text-[10px] font-bold text-mumu-navy bg-slate-100 px-2 py-0.5 rounded">【申請時間】</span>
+                                <p class="text-[11px] font-bold text-slate-700 mt-0.5">全年開放申請繳交資料，1月晉升</p>
+                            </div>
+                            <div class="bg-amber-50/50 border border-amber-200 p-2 rounded-xl text-left shadow-sm">
+                                <span class="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">【晉升獎勵】</span>
+                                <p class="text-[11px] font-bold text-slate-700 mt-0.5">頒發認證眼動師資證書</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Side Requirements -->
+                        <div class="absolute right-[50px] top-[300px] w-[350px]" style="z-index: 10;">
+                            <div class="bg-white border-2 border-red-200 p-3 rounded-2xl text-left shadow-sm">
+                                <span class="text-[10px] font-black text-red-700 bg-red-100 px-2 py-0.5 rounded">【申請資格】</span>
+                                <ul class="text-[11px] font-bold text-slate-600 space-y-1 mt-1.5">
+                                    <li>1. 累積總課堂數滿 <strong>60 堂</strong></li>
+                                    <li>2. 繳交 PECS 1~3階個案實作報告*1</li>
+                                    <li>3. 繳交現況分析表*1</li>
+                                    <li>4. 必修代幣制度</li>
+                                    <li>5. 年度必修教育時數</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- STAGE 2 AREA (Blue Zone) -->
+                        <div class="absolute left-4 top-[450px] w-[968px] h-[390px] bg-sky-50/30 border-2 border-sky-100 rounded-3xl p-4">
+                            <span class="text-xs font-black text-sky-800 tracking-wider bg-sky-100 px-3 py-1 rounded-lg">STAGE 2</span>
+
+                            <!-- CEI-I Card (Aesthetic Top-Align Lock) -->
+                            <div class="absolute left-6 top-[45px] w-[240px] h-[90px] bg-white border-2 border-sky-500 rounded-2xl p-3.5 shadow-md flex items-center justify-center text-center" style="z-index: 10;">
+                                <div class="flex flex-col items-center">
+                                    <span class="bg-sky-100 text-sky-800 font-extrabold text-xs px-2.5 py-1 rounded-full mb-1">CEI-I</span>
+                                    <strong class="text-sm text-slate-800">一級認證眼動教師</strong>
+                                </div>
+                            </div>
+
+                            <!-- Core Tasks Box -->
+                            <div class="absolute left-[320px] top-[45px] w-[360px] h-[90px] bg-white border border-sky-200 rounded-2xl p-3.5 shadow-sm flex flex-col justify-center" style="z-index: 10;">
+                                <h5 class="text-xs font-extrabold text-sky-800 mb-1"><i class="fa-solid fa-list-check"></i> 【年度核心任務】</h5>
+                                <ul class="text-[11px] text-slate-600 font-semibold space-y-0.5">
+                                    <li>• 1. 簽署年約</li>
+                                    <li>• 2. 年度累積課堂數滿 120 堂</li>
+                                    <li>• 3. 年度必修教育時數</li>
+                                </ul>
+                            </div>
+
+                            <!-- Matchmaking Area Box (Alignment Lock to center Y=90px) -->
+                            <div class="absolute left-[740px] top-[50px] w-[200px] h-[80px] bg-sky-100/40 border border-sky-200 rounded-2xl p-3 flex items-center justify-center text-center" style="z-index: 10;">
+                                <span class="text-[11px] font-bold text-sky-800"><i class="fa-solid fa-people-arrows"></i> 可媒合：L1、L2、L3學生</span>
+                            </div>
+
+                            <!-- Single Unit Rate Box (Connected to CEI-I card bottom via curve) -->
+                            <div class="absolute left-[320px] top-[185px] w-[160px] h-[50px] bg-white border border-sky-200 rounded-xl flex items-center justify-center shadow-sm" style="z-index: 10;">
+                                <span class="text-xs font-bold text-slate-700">單堂課酬：1200</span>
+                            </div>
+
+                            <!-- Plus Sign -->
+                            <div class="absolute left-[495px] top-[195px] w-[30px] h-[30px] flex items-center justify-center text-slate-400 font-black text-xl" style="z-index: 10;">
+                                <i class="fa-solid fa-plus text-sky-400"></i>
+                            </div>
+
+                            <!-- Bonus Box -->
+                            <div class="absolute left-[540px] top-[145px] w-[420px] h-[130px] bg-white border border-sky-200 rounded-2xl p-3.5 shadow-sm flex flex-col justify-center" style="z-index: 10;">
+                                <h5 class="text-xs font-black text-sky-800 mb-1.5"><i class="fa-solid fa-sack-dollar"></i> 【獎勵金】每10堂課結算，隔年1/1重新計算</h5>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-slate-50 p-1.5 rounded-xl text-center">
+                                        <span class="text-[10px] font-bold text-slate-400 block">&lt;0-120堂&gt;</span>
+                                        <strong class="text-[11px] text-slate-700 block">每10堂 $2200</strong>
+                                        <span class="text-[9px] text-slate-400 block">(+$220/堂)</span>
+                                    </div>
+                                    <div class="bg-sky-50 p-1.5 rounded-xl text-center">
+                                        <span class="text-[10px] font-bold text-sky-800 block">&lt;121堂以上&gt;</span>
+                                        <strong class="text-[11px] text-sky-950 block">每10堂 $3200</strong>
+                                        <span class="text-[9px] text-sky-600 block">(+$320/堂)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STAGE 2 ➔ STAGE 3 TRANSITION -->
+                        <!-- Left Side Conditions -->
+                        <div class="absolute left-[130px] top-[860px] w-[310px] space-y-1.5" style="z-index: 10;">
+                            <div class="bg-white border border-slate-200 p-2 rounded-xl text-left shadow-sm">
+                                <span class="text-[10px] font-bold text-mumu-navy bg-slate-100 px-2 py-0.5 rounded">【申請時間】</span>
+                                <p class="text-[11px] font-bold text-slate-700 mt-0.5">全年開放申請繳交資料，1月晉升</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Side Requirements -->
+                        <div class="absolute right-[50px] top-[860px] w-[350px]" style="z-index: 10;">
+                            <div class="bg-white border-2 border-red-200 p-3 rounded-2xl text-left shadow-sm">
+                                <span class="text-[10px] font-black text-red-700 bg-red-100 px-2 py-0.5 rounded">【申請資格】</span>
+                                <ul class="text-[11px] font-bold text-slate-600 space-y-1 mt-1.5">
+                                    <li>1. 累積總課堂數滿 <strong>240 堂</strong></li>
+                                    <li>2. 繳交 PECS 1~3階個案實作報告*1</li>
+                                    <li>3. 研討融入教學個案報告*1</li>
+                                    <li>4. 必修PECS 4課程</li>
+                                    <li>5. 年度必修教育時數</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- STAGE 3 AREA (Yellow Zone) -->
+                        <div class="absolute left-4 top-[1010px] w-[968px] h-[410px] bg-amber-50/20 border-2 border-amber-100 rounded-3xl p-4">
+                            <span class="text-xs font-black text-amber-800 tracking-wider bg-amber-100 px-3 py-1 rounded-lg">STAGE 3</span>
+
+                            <!-- CEI-II Card (Aesthetic Top-Align Lock) -->
+                            <div class="absolute left-6 top-[65px] w-[240px] h-[100px] bg-white border-2 border-amber-500 rounded-2xl p-3 shadow-md flex items-center justify-center text-center" style="z-index: 10;">
+                                <div class="flex flex-col items-center">
+                                    <span class="bg-amber-100 text-amber-800 font-extrabold text-xs px-2.5 py-1 rounded-full mb-1">CEI-II</span>
+                                    <strong class="text-sm text-slate-800">二級認證眼動教師</strong>
+                                </div>
+                            </div>
+
+                            <!-- Core Tasks Box -->
+                            <div class="absolute left-[320px] top-[45px] w-[360px] h-[140px] bg-white border border-amber-200 rounded-2xl p-3.5 shadow-sm flex flex-col justify-center" style="z-index: 10;">
+                                <h5 class="text-xs font-extrabold text-amber-800 mb-1.5"><i class="fa-solid fa-list-check"></i> 【年度核心任務】</h5>
+                                <ul class="text-[11px] text-slate-600 font-semibold space-y-1">
+                                    <li>• 1. 簽署年約</li>
+                                    <li>• 2. 年度累積課堂數滿 120 堂</li>
+                                    <li>• 3. 年度必修教育時數</li>
+                                    <li>• 4. 個案報告*1 (二選一)</li>
+                                </ul>
+                            </div>
+
+                            <!-- Matchmaking Area Box (Alignment Lock to center Y=115px) -->
+                            <div class="absolute left-[740px] top-[65px] w-[200px] h-[100px] bg-amber-100/40 border border-amber-200 rounded-2xl p-3 flex items-center justify-center text-center" style="z-index: 10;">
+                                <span class="text-[11px] font-bold text-amber-800"><i class="fa-solid fa-people-arrows"></i> 可媒合：全階段學生</span>
+                            </div>
+
+                            <!-- Single Unit Rate Box (Connected to CEI-II card bottom via curve) -->
+                            <div class="absolute left-[320px] top-[245px] w-[160px] h-[50px] bg-white border border-amber-200 rounded-xl flex items-center justify-center shadow-sm" style="z-index: 10;">
+                                <span class="text-xs font-bold text-slate-700">單堂課酬：1200</span>
+                            </div>
+
+                            <!-- Plus Sign -->
+                            <div class="absolute left-[495px] top-[255px] w-[30px] h-[30px] flex items-center justify-center text-slate-400 font-black text-xl" style="z-index: 10;">
+                                <i class="fa-solid fa-plus text-amber-400"></i>
+                            </div>
+
+                            <!-- Bonus Box -->
+                            <div class="absolute left-[540px] top-[205px] w-[420px] h-[130px] bg-white border border-amber-200 rounded-2xl p-3.5 shadow-sm flex flex-col justify-center" style="z-index: 10;">
+                                <h5 class="text-xs font-black text-amber-800 mb-1.5"><i class="fa-solid fa-sack-dollar"></i> 【獎勵金】每10堂課結算，隔年1/1重新計算</h5>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-slate-50 p-1.5 rounded-xl text-center">
+                                        <span class="text-[10px] font-bold text-slate-400 block">&lt;0-120堂&gt;</span>
+                                        <strong class="text-[11px] text-slate-700 block">每10堂 $3800</strong>
+                                        <span class="text-[9px] text-slate-400 block">(+$380/堂)</span>
+                                    </div>
+                                    <div class="bg-amber-50 p-1.5 rounded-xl text-center">
+                                        <span class="text-[10px] font-bold text-amber-800 block">&lt;121堂以上&gt;</span>
+                                        <strong class="text-[11px] text-amber-950 block">每10堂 $4600</strong>
+                                        <span class="text-[9px] text-amber-600 block">(+$460/堂)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: SALARY CALCULATOR VIEW -->
         <div id="view-calculator" class="hidden w-full max-w-4xl bg-white rounded-3xl p-6 md:p-8 shadow-2xl border border-slate-200">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-5 mb-6 gap-3">
                 <div>
@@ -711,7 +1010,7 @@
                     </h2>
                     <p class="text-sm text-slate-500 font-bold mt-1">請在下方選擇師資等級並滑動完課堂數，即可即時呈現全年與每堂結算細項！</p>
                 </div>
-                <span class="bg-teal-50 text-mumu-blue font-bold px-3 py-1.5 rounded-lg text-xs border border-teal-100">即時算．免公式</span>
+                <span class="bg-teal-50 text-mumu-blue font-bold px-3 py-1.5 rounded-lg text-xs border border-teal-150">即時算．免公式</span>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -850,7 +1149,7 @@
                         <!-- Sub-metric: Effective Hourly Rate -->
                         <div class="bg-mumu-navy text-white p-3.5 rounded-xl flex justify-between items-center">
                             <div>
-                                <span class="text-[10px] text-teal-200 font-bold block uppercase">實際平均綜合堂數時薪</span>
+                                <span class="text-[10px] text-teal-200 font-bold block uppercase">實際平均綜合堂數課酬</span>
                                 <span class="text-xs text-teal-200">（總金額 ÷ 總堂數）高於公定基本價！</span>
                             </div>
                             <div class="text-right">
@@ -903,6 +1202,7 @@
         let currentRank = 'cei-1'; // 'cei-1' or 'cei-2'
         let revealDeck = null;
         let isPseudoFullscreen = false; // Toggled dynamically on iOS Safari fallback
+        let zoomLevel = 1.0; // Interactive Roadmap current physical scale
 
         // On window load, initialize modules
         window.onload = function() {
@@ -985,6 +1285,7 @@
 
             // Initialize salary calculator values
             updateCalculator(120);
+            updateRoadmapZoom(1.0); // Reset map tab zoom on page load
         }
 
         // Responsive scaling wrapper logic for Embedded Reveal.js with Fullscreen Aspect Ratio Adapters
@@ -1045,6 +1346,32 @@
             
             if (revealDeck && typeof revealDeck.layout === 'function') {
                 revealDeck.layout();
+            }
+        }
+
+        // Zoom controller for interactive roadmap tab
+        function zoomRoadmap(level) {
+            updateRoadmapZoom(level);
+        }
+
+        function updateRoadmapZoom(level) {
+            zoomLevel = level;
+            const canvas = document.getElementById('roadmap-canvas');
+            const forceScroll = document.getElementById('roadmap-force-scroll');
+            if (canvas && forceScroll) {
+                canvas.style.transform = `scale(${zoomLevel})`;
+                canvas.style.transformOrigin = 'top left';
+                
+                // Base dimensions of the SVG vector blueprint
+                const baseWidth = 1000;
+                const baseHeight = 1450;
+                
+                forceScroll.style.width = (baseWidth * zoomLevel) + 'px';
+                forceScroll.style.height = (baseHeight * zoomLevel) + 'px';
+            }
+            const pctEl = document.getElementById('zoom-percentage');
+            if (pctEl) {
+                pctEl.innerText = Math.round(zoomLevel * 100) + '%';
             }
         }
 
@@ -1124,11 +1451,15 @@
 
             // Toggle corresponding views
             document.getElementById('view-presentation-container').classList.add('hidden');
+            document.getElementById('view-roadmap-container').classList.add('hidden');
             document.getElementById('view-calculator').classList.add('hidden');
 
             if (tabId === 'presentation') {
                 document.getElementById('view-presentation-container').classList.remove('hidden');
                 adjustPresentationScale();
+            } else if (tabId === 'roadmap') {
+                document.getElementById('view-roadmap-container').classList.remove('hidden');
+                updateRoadmapZoom(zoomLevel); // Recalculate physical dimensions upon rendering to prevent misalignment
             } else if (tabId === 'calculator') {
                 document.getElementById('view-calculator').classList.remove('hidden');
             }
@@ -1274,7 +1605,7 @@
             reportStr += `• 基礎課酬估計：$${basePay} 元\n`;
             reportStr += `• 累積段位獎助金：$${bonusPay} 元 (含年底尾數比例發清)\n`;
             reportStr += `★ 年度預估薪資報酬總計：$${totalPay} 元\n`;
-            reportStr += `★ 實際平均每堂綜合時薪：$${hourlyPay} 元 / 堂 (超越基本時薪 $1,200)\n`;
+            reportStr += `★ 實際平均每堂綜合課酬：$${hourlyPay} 元 / 堂 (超越基本單堂課酬 $1,200)\n`;
             reportStr += `※ 本數據為新制系統預估，實際應以最終年終對帳發放金額為主。`;
 
             const tempTextArea = document.createElement('textarea');
@@ -1318,6 +1649,7 @@
             container.classList.add('scale-100');
         }
 
+        // Close Custom Modal
         function closeCustomModal() {
             let modal = document.getElementById('custom-modal');
             let container = document.getElementById('modal-container');
