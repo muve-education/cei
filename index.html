@@ -1280,10 +1280,14 @@
                             btnIcon.classList.add('fa-expand');
                         }
                     }
-                    adjustPresentationScale();
+                    
+                    // 💡 關鍵修復：加入 150ms 延時，確保瀏覽器完成全螢幕退出的動畫、恢復正確尺寸後再進行縮放重算
+                    setTimeout(() => {
+                        adjustPresentationScale();
+                    }, 150);
                 });
             });
-
+            
             // Initialize salary calculator values
             updateCalculator(120);
             updateRoadmapZoom(1.0); // Reset map tab zoom on page load
