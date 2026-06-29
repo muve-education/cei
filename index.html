@@ -1254,7 +1254,7 @@
             adjustPresentationScale();
             window.addEventListener('resize', adjustPresentationScale);
 
-            // Bind native fullscreen change listeners to keep UI state in sync on Desktop/Android esc exits
+// Bind native fullscreen change listeners to keep UI state in sync on Desktop/Android esc exits
             const nativeEvents = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
             nativeEvents.forEach(evt => {
                 document.addEventListener(evt, () => {
@@ -1281,19 +1281,15 @@
                         }
                     }
                     
-                    // 💡 關鍵修復：加入 150ms 延時，確保瀏覽器完成全螢幕退出的動畫、恢復正確尺寸後再進行縮放重算
+                    // 💡 關鍵修復：立即計算一次，並在 150 毫秒後等動畫結束，再強制計算還原一次，雙重保障！
+                    adjustPresentationScale();
                     setTimeout(() => {
                         adjustPresentationScale();
+                        window.dispatchEvent(new Event('resize'));
                     }, 150);
                 });
             });
-            
-            // Initialize salary calculator values
-            updateCalculator(120);
-            updateRoadmapZoom(1.0); // Reset map tab zoom on page load
-        }
-
-        // Responsive scaling wrapper logic for Embedded Reveal.js with Fullscreen Aspect Ratio Adapters
+// Responsive scaling wrapper logic for Embedded Reveal.js with Fullscreen Aspect Ratio Adapters
         function adjustPresentationScale() {
             const wrapper = document.getElementById('view-presentation');
             const reveal = document.querySelector('.reveal');
@@ -1329,24 +1325,18 @@
                 reveal.style.marginLeft = '';
                 reveal.style.marginTop = '';
 
-                if (wrapperWidth < 1100) {
-                    // Force the actual internal width/height of Reveal.js container to prevent double-scaling
-                    reveal.style.width = revealTargetWidth + 'px';
-                    reveal.style.height = revealTargetHeight + 'px';
-                    
-                    const scale = (wrapperWidth) / revealTargetWidth;
-                    reveal.style.transform = `scale(${scale})`;
-                    reveal.style.transformOrigin = 'top left'; // Pin the scale perfectly to the left
-                    
-                    // Directly assign wrapper height to exactly match the scaled presentation height (removing dark empty space!)
-                    const computedHeight = revealTargetHeight * scale;
-                    wrapper.style.height = computedHeight + 'px';
-                } else {
-                    reveal.style.transform = 'none';
-                    reveal.style.width = '100%';
-                    reveal.style.height = '100%';
-                    wrapper.style.height = '700px';
-                }
+                // 💡 關鍵修復：不論螢幕多大，在非全螢幕下一律使用我們的 CSS 縮放，徹底避免 Reveal.js 尺寸誤判！
+                const safeWidth = wrapperWidth > 0 ? wrapperWidth : 1050;
+                const scale = safeWidth / revealTargetWidth;
+                
+                reveal.style.width = revealTargetWidth + 'px';
+                reveal.style.height = revealTargetHeight + 'px';
+                reveal.style.transform = `scale(${scale})`;
+                reveal.style.transformOrigin = 'top left'; // Pin the scale perfectly to the left
+                
+                // Directly assign wrapper height to exactly match the scaled presentation height
+                const computedHeight = revealTargetHeight * scale;
+                wrapper.style.height = computedHeight + 'px';
             }
             
             if (revealDeck && typeof revealDeck.layout === 'function') {
