@@ -1512,7 +1512,7 @@
             }
         }
 
-        // 🌟 新增：透過 Google Visualization API 安全查詢公開中轉表
+      // 🌟 智慧動態分頁欄位版：自動切換 D/E 欄，全面支援「 總計」模糊比對
         async function fetchTeacherHours() {
             const name = document.getElementById('teacher-name-input').value.trim();
             const targetGid = document.getElementById('sheet-tab-select').value;
@@ -1523,11 +1523,17 @@
                 return;
             }
 
-            // 已自動綁定您最新的公開表 ID
             const PUBLIC_SPREADSHEET_ID = '131P96f4PekCUtzLIwGzirAX3CdxwPb88WMH6JJt6_bM'; 
             
-            // 精確鎖定 D 欄：隱藏 B、C 欄後完課總數自動落在 D 欄
-            const querySql = encodeURIComponent(`SELECT D WHERE A = '${name}'`); 
+            // 💡 智慧動態欄位判斷：
+            // 如果 gid 是 0 (2026累計)，就抓 E 欄；其餘（生涯總累計 gid 1072820372）一律抓 D 欄
+            let targetColumn = 'D';
+            if (targetGid === '0') {
+                targetColumn = 'E';
+            }
+            
+            // 全面使用 CONTAINS 模糊包含語法，完美解決名字後方帶有「 總計」的問題
+            const querySql = encodeURIComponent(`SELECT ${targetColumn} WHERE A CONTAINS '${name}'`); 
             const url = `https://docs.google.com/spreadsheets/d/${PUBLIC_SPREADSHEET_ID}/gviz/tq?gid=${targetGid}&tq=${querySql}`;
 
             document.getElementById('query-result-box').classList.add('hidden');
@@ -1540,18 +1546,26 @@
                 const jsonString = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
                 const obj = JSON.parse(jsonString);
                 
-                let hours = 0;
-                if (obj.table && obj.table.rows && obj.table.rows.length > 0) {
-                    hours = parseFloat(obj.table.rows[0].c[0].v) || 0;
+                if (obj.status === 'error') {
+                    const errorMsg = obj.errors && obj.errors[0] ? obj.errors[0].detailed_message : '未知欄位錯誤';
+                    showCustomModal('⚠️ Google 後台報錯', `試算表回應：<b>${errorMsg}</b>`, 'fa-triangle-exclamation', 'text-red-500');
+                    return;
                 }
 
-                // 渲染結果至畫面上
+                let hours = 0;
+                let found = false;
+                if (obj.table && obj.table.rows && obj.table.rows.length > 0) {
+                    hours = parseFloat(obj.table.rows[0].c[0].v) || 0;
+                    found = true;
+                }
+
+                // 渲染結果至網頁畫面上
                 document.getElementById('result-tab-name').innerText = tabName;
                 document.getElementById('result-hours').innerText = hours + ' 堂';
                 document.getElementById('query-result-box').classList.remove('hidden');
 
-                if (hours === 0) {
-                    showCustomModal('🔍 查詢提醒', `在「${tabName}」中找不到「${name}」老師的當期資料，或堂數目前為 0。`, 'fa-circle-question', 'text-slate-500');
+                if (!found) {
+                    showCustomModal('🔍 查詢提醒', `在「${tabName}」中找不到包含「${name}」老師的資料。`, 'fa-circle-question', 'text-slate-500');
                 }
 
             } catch (error) {
